@@ -1,0 +1,21 @@
+{
+  "name": "internet-stock-picker",
+  "version": "0.0.1",
+  "description": "A simple way to see which stocks are being talked about right now!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "internet",
+    "stocks",
+    "etfs",
+    "market",
+    "popularity"
+  ],
+  "author": "Kemal Kongar & Ural Tunaboyu",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
