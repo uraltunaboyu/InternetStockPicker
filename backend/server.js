@@ -36,6 +36,7 @@ app.get('/download/others', (req, res) => {
 
 });
 
+/*
 app.get('/404', function (req, res, next) {
     // trigger a 404 since no other middleware
     // will match /404 after this one, and we're not
@@ -54,40 +55,13 @@ app.get('/500', function (req, res, next) {
     // trigger a generic (500) error
     next(new Error('Server error? Oops.'));
 });
+*/
 
+// Error handling to be done later. Missing routes and files.
 
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
 })
-
-app.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.status(500).send('Something broke!')
-})
-
-app.use(function (req, res, next) {
-    res.status(404);
-
-    res.format({
-        html: function () {
-            res.render('404', { url: req.url })
-        },
-        json: function () {
-            res.json({ error: 'Not found' })
-        },
-        default: function () {
-            res.type('txt').send('Not found')
-        }
-    })
-});
-
-app.use(function(err, req, res, next){
-    // we may use properties of the error object
-    // here and next(err) appropriately, or if
-    // we possibly recovered from the error, simply next().
-    res.status(err.status || 500);
-    res.render('500', { error: err });
-  });
 
 const port = 8080;
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
