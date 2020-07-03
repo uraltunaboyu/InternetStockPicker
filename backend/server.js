@@ -60,6 +60,7 @@ app.get('/500', function (req, res, next) {
 */
 
 // Error handling to be done later. Missing routes and files.
+// Taken from example error page of express.js 
 
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
