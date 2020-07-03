@@ -8,9 +8,27 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve('../frontend/index.html'));
 });
 
-app.get('/nasdaq', (req, res) => {
+app.get('/download/nasdaq', (req, res) => {
 
     fs.readFile(path.resolve('../data/nasdaq.json'), (err, json) => {
+        let obj = JSON.parse(json);
+        res.json(obj);
+    });
+
+});
+
+app.get('/download/nyse', (req, res) => {
+
+    fs.readFile(path.resolve('../data/nyse.json'), (err, json) => {
+        let obj = JSON.parse(json);
+        res.json(obj);
+    });
+
+});
+
+app.get('/download/others', (req, res) => {
+
+    fs.readFile(path.resolve('../data/others-listed.json'), (err, json) => {
         let obj = JSON.parse(json);
         res.json(obj);
     });
