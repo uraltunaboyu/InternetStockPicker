@@ -3,8 +3,9 @@ const app = express();
 const path = require('path');
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.resolve('../frontend/index.html'));
 });
 
-console.log("Hello");
-app.listen(8080);
+
+const port = 8080;
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
