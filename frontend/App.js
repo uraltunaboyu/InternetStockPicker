@@ -2,9 +2,9 @@ import React from 'react';
 import 'style.css';
 import nasdaqVals from '../data/nasdaq.json'
 import Chart from './chart.js'
-export default function App() {
+export default function app() {
     return(
-        <div className="App">
+        <div className="app">
             <h1 id="title">
                 <ul>
                     {nasdaqVals.map(entry => {
