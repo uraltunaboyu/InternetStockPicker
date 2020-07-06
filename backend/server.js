@@ -1,11 +1,12 @@
 "use strict";
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const fs = require('fs');
 
-
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve('../frontend/index.html'));
@@ -67,5 +68,5 @@ app.use(function (req, res, next) {
 })
 
 
-const port = 8080;
+const port = 5000;
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
