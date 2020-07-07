@@ -5,11 +5,16 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const fs = require('fs');
+const cors = require('cors');
 
+
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 
+
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve('../frontend/public/index.html'));
+    //res.sendFile(path.resolve('../frontend/public/index.html'));
+    res.send("API is working properly");
 });
 
 app.get('/download/nasdaq', (req, res) => {
@@ -68,5 +73,5 @@ app.use(function (req, res, next) {
 })
 
 
-const port = 5000;
+const port = 9000;
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
