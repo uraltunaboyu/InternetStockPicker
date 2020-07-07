@@ -9,7 +9,7 @@ const fs = require('fs');
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve('../frontend/index.html'));
+    res.sendFile(path.resolve('../frontend/public/index.html'));
 });
 
 app.get('/download/nasdaq', (req, res) => {
