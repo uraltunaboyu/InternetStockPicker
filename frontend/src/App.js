@@ -24,11 +24,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <Navbar expand="lg" variant="dark" bg="dark">
-            <Navbar.Brand href="#">InternetStockPicks</Navbar.Brand>
-          </Navbar>
-        </header>
         <Container>
             <ListGroup>
               {dummyVals.map(entry => {
@@ -47,7 +42,5 @@ class App extends React.Component {
   }
 }
 export default App;
-
-ReactDOM.render(<App />, document.getElementById('root'));
 
 
