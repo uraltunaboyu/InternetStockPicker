@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import dummyVals from './dummy'
 import Graph from './graph'
+import { Container, Row, Col, Navbar, Button, Table, ListGroup } from 'react-bootstrap'
 
 class App extends React.Component {
   constructor(props) {
@@ -22,15 +23,24 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <ul>
-          {dummyVals.map(entry => {
-            return (
-              <li key={entry.ticker}>
-                <Graph title={entry.name} values={entry.values} />
-              </li>
-            );
-          })}
-        </ul>
+        <header>
+          <Navbar expand="lg" variant="dark" bg="dark">
+            <Navbar.Brand href="#">InternetStockPicks</Navbar.Brand>
+          </Navbar>
+        </header>
+        <Container>
+            <ListGroup>
+              {dummyVals.map(entry => {
+                return (
+                  <Col>
+                    <ListGroup.Item key={entry.ticker}>
+                      <Graph title={entry.name} values={entry.values} />
+                    </ListGroup.Item>
+                  </Col>
+                );
+              })}
+            </ListGroup>
+        </Container>
       </div>
     );
   }
