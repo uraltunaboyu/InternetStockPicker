@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import logo from './logo.svg';
 import './App.css';
 import dummyVals from './dummy'
@@ -45,5 +46,8 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
