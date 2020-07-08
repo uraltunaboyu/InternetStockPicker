@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import logo from './logo.svg';
-import './App.css';
+import './MainGraph.css';
 import dummyVals from './dummy'
-import Graph from './graph'
+import Graph from './Graph.jsx'
 import { Container, Row, Col, Navbar, Button, Table, ListGroup } from 'react-bootstrap'
 
-class App extends React.Component {
+class MainGraph extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { apiResponse: "" };
+    //this.state = { apiResponse: "" };
   }
-
+  /*
   callAPI() {
     fetch("http://localhost:9000/")
       .then(res => res.text())
@@ -20,10 +20,10 @@ class App extends React.Component {
 
   componentWillMount() {
     this.callAPI();
-  }
+  } */
   render() {
     return (
-      <div className="App">
+      <div className="MainGraph">
         <Container>
             <ListGroup>
               {dummyVals.map(entry => {
@@ -41,6 +41,6 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default MainGraph;
 
 
