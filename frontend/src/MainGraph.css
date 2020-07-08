@@ -1,8 +1,8 @@
-.App {
+.MainGraph {
   text-align: center;
 }
 
-.App-header {
+.MainGraph-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
