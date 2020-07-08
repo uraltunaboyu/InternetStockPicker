@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './MainGraph.css';
 import dummyVals from './dummy'
 import Graph from './Graph.jsx'
-import { Container, Row, Col, Navbar, Button, Table, ListGroup } from 'react-bootstrap'
+import { Container, Col, ListGroup } from 'react-bootstrap'
 
 class MainGraph extends React.Component {
   constructor(props) {

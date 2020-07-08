@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './MainGraph.css';
 import { Container, Navbar, Button, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap'
 var moment = require('moment');
