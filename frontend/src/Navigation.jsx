@@ -1,7 +1,5 @@
 import React from "react";
-import "./MainGraph.css";
 import {
-  Container,
   Navbar,
   Button,
   Nav,

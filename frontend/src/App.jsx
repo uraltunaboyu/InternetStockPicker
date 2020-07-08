@@ -1,6 +1,7 @@
 import React from "react";
 import MainGraph from "./MainGraph";
-import Navigation from "./Navigation";
+import Navbar from "./Navigation";
+import { Container, Row } from 'react-bootstrap'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +11,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div class="App">
-        <Navigation />
-        <MainGraph />
+      <div className="App">
+        <Navbar />
+        <Container>
+          <Row>
+            <MainGraph />
+          </Row>
+          <Row>
+
+          </Row>
+        </Container>
       </div>
     );
   }
