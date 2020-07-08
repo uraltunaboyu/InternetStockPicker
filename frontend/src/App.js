@@ -31,7 +31,6 @@ class App extends React.Component {
             );
           })}
         </ul>
-        <p className="App-intro">;{this.state.apiResponse}</p>
       </div>
     );
   }

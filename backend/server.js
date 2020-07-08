@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.get('/', (req, res) => {
-    //res.sendFile(path.resolve('../frontend/public/index.html'));
-    res.send("API is working properly");
+    res.sendFile(path.resolve('../frontend/public/index.html'));
+    //res.send("API is working properly");
 });
 
 app.get('/download/nasdaq', (req, res) => {

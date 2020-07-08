@@ -29,11 +29,18 @@ class Graph extends React.Component {
     ]
   };
 
+  constructor(props){
+      super(props);
+      this.state = {
+          data: this.initialState
+      };
+  }
+
   render() {
     return (
       <div>
         <h2>{this.props.graphTitle}</h2>
-        <Line data={this.initialState} />
+        <Line data={this.state.data} />
       </div>
     );
   }
