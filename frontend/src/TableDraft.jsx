@@ -1,62 +1,76 @@
-import React, { Component } from 'react';
-import { FancyGridReact, Grid } from 'fancygrid-react';
+import { useTable } from 'react-table'
+import React from 'react'
+import { Table } from 'react-bootstrap'
 
-class TableDraft extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default function DataTable() {
+    const data = React.useMemo(
+        () => [
+            {}
+        ]
+    )
 
-    render() {
-        return (
-            <div>
-                <Grid
-                    selModel='rows'
-                    theme='gray'
-                    height={400}
-                    width={500}
-                    defaults={{ sortable: true }}
-                    trackOver={true}
-                    columns={this.getColumns()}
-                    data={this.getData()}>
-                </Grid>
-            </div>
-        );
-    }
+    const columns = React.useMemo( 
+        () => [
+            {
+                Header: 'Securities Name',
+                accessor: 'name'
+            },
+            {
+                Header: 'Ticker',
+                accessor: 'ticker'
+            },
+            {
+                Header: 'Rank',
+                accessor: 'rank'
+            },
+            {
+                Header: 'Last Rank',
+                accessor: 'lastrank'
+            }
+        ]
+    )
 
-    getColumns() {
-        return [{
-            index: 'company',
-            title: 'Company',
-            type: 'string',
-            width: 100
-        }, {
-            index: 'name',
-            title: 'Name',
-            type: 'string',
-            width: 100
-        }, {
-            index: 'surname',
-            title: 'Sur Name',
-            type: 'string',
-            width: 100
-        }, {
-            index: 'age',
-            title: 'Age',
-            type: 'number',
-            width: 100
-        }];
-    }
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow
+    } = useTable({ columns, data })
 
-    getData() {
-        return [
-            { name: 'Ted', surname: 'Smith', company: 'Electrical Systems', age: 30 },
-            { name: 'Ed', surname: 'Johnson', company: 'Energy and Oil', age: 35 },
-            { name: 'Sam', surname: 'Williams', company: 'Airbus', age: 38 },
-            { name: 'Alexander', surname: 'Brown', company: 'Renault', age: 24 },
-            { name: 'Nicholas', surname: 'Miller', company: 'Adobe', age: 33 }
-        ];
-    }
-
+    return (
+        <Table {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th
+                    {...column.getHeaderProps()}
+                  >
+                    {column.render('Header')}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row)
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                      >
+                        {cell.render('Cell')}
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
+      )
 }
-
-export default TableDraft;
