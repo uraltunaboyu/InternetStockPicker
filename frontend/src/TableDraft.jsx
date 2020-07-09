@@ -19,6 +19,35 @@ const sectorOptions = {
     10: "Energy"
 }
 
+
+const sizePerPageRenderer = ({
+    options,
+    currSizePerPage,
+    onSizePerPageChange
+  }) => (
+    <div className="btn-group" role="group">
+      {
+        options.map((option) => {
+          const isSelected = currSizePerPage === `${option.page}`;
+          return (
+            <button
+              key={ option.text }
+              type="button"
+              onClick={ () => onSizePerPageChange(option.page) }
+              className={ `btn ${isSelected ? 'btn-primary' : 'btn-light'}` }
+            >
+              { option.text }
+            </button>
+          );
+        })
+      }
+    </div>
+  );
+  
+  const options = {
+    sizePerPageRenderer
+  };
+
 const columns = [
   {
     dataField: "Name",
@@ -53,10 +82,12 @@ const columns = [
 
 export default () => (
   <BootstrapTable
+    bootstrap4
     keyField="rank"
     data={values}
     columns={columns}
     filter={filterFactory()}
-    pagination = { paginationFactory() }
+    filterPosition="top"
+    pagination = { paginationFactory(options) }
   />
 );
