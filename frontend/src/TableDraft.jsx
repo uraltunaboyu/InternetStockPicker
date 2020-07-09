@@ -70,12 +70,12 @@ export default () => (
         <SearchBar {...props.searchProps} />
         <hr />
         <BootstrapTable
-          bootstrap4
           keyField="rank"
           data={values}
           columns={columns}
           pagination={paginationFactory(options)}
           {...props.baseProps}
+          bootstrap4
         />
       </div>
     )}
