@@ -1,6 +1,7 @@
 import React from "react";
 import MainGraph from "./MainGraph";
 import Navbar from "./Navigation";
+import TableDraft from "./TableDraft";
 import { Container, Row } from 'react-bootstrap'
 
 class App extends React.Component {
@@ -18,7 +19,7 @@ class App extends React.Component {
             <MainGraph />
           </Row>
           <Row>
-
+            <TableDraft />
           </Row>
         </Container>
       </div>
