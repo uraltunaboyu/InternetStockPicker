@@ -2,16 +2,22 @@ import pandas as pd
 import json
 import string
 
-with open('./URS/scrapes/07-09-2020/c-Daily Discussion Thread for July 09, 2020-RAW.json', 'r') as f:
+with open('./c-Daily Discussion Thread for July 09, 2020-RAW.json', 'r') as f:
     data = json.load(f)
 
-with open ('./URS/scrapes/07-09-2020/c-What Are Your Moves Tomorrow, July 09, 2020-RAW.json', 'r') as f2:
+with open ('./c-What Are Your Moves Tomorrow, July 09, 2020-RAW.json', 'r') as f2:
     data2 = json.load(f2)
 
 with open('./s&p500editable.json', 'r') as s:
     snp = json.load(s)
 
-commonWords = ["i", "the", "and", "or", "yes", "no", "for", "if", "let's", "see", "of", "in", "more", "if", "not", "your", "daily", "all", "year", "buy", "sell", "call", "put", "a", "are", "all"]
+commonWords = ["i", "it", "a", "see", "so", "now", "low", "well", "all", "the", "and", "or", "yes", "no", "for", "if", "let's", "see", "of", "in", "more", "if", "not", "your", "daily", "all", "year", "buy", "sell", "call", "put", "a", "are", "all"]
+capitalizedWords= []
+
+for word in commonWords:
+    capitalizedWords.append(word.capitalize)
+
+
 entryID = []
 for index in data:
     entryID.append(index)
@@ -20,13 +26,13 @@ for index in data:
 #Cleaning the data for f1
 for entry in entryID: 
     for index in data[entry]:
-        index["Text"] = index["Text"].lower()
         words = index["Text"].split()
         for word in words:
             if len(word) > 5:
                 words.remove(word)
-            if word in commonWords:
+            if word in commonWords or word in capitalizedWords:
                 words.remove(word)
+            word = word.lower()
         index["Text-Array"] = words
         #print(words)
 
@@ -39,6 +45,9 @@ for entry in entryID:
         for company in snp:
             lowercaseSymbol = company["Symbol"].lower()
             if lowercaseSymbol in index["Text-Array"]:
+                company["Mentions"] += 1
+            ticker = "$" + lowercaseSymbol
+            if ticker in index["Text-Array"]:
                 company["Mentions"] += 1
 
 entryID = []

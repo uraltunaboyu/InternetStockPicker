@@ -57,7 +57,7 @@
         "Name": "Advanced Micro Devices Inc",
         "Sector": "Information Technology",
         "Symbol": "AMD",
-        "Mentions": 49
+        "Mentions": 46
     },
     {
         "Name": "AES Corp",
@@ -75,7 +75,7 @@
         "Name": "Agilent Technologies Inc",
         "Sector": "Health Care",
         "Symbol": "A",
-        "Mentions": 1349
+        "Mentions": 1366
     },
     {
         "Name": "Air Products & Chemicals Inc",
@@ -105,7 +105,7 @@
         "Name": "Alexandria Real Estate Equities",
         "Sector": "Real Estate",
         "Symbol": "ARE",
-        "Mentions": 414
+        "Mentions": 419
     },
     {
         "Name": "Alexion Pharmaceuticals",
@@ -141,7 +141,7 @@
         "Name": "Allstate Corp",
         "Sector": "Financials",
         "Symbol": "ALL",
-        "Mentions": 251
+        "Mentions": 275
     },
     {
         "Name": "Alphabet Inc. (Class A)",
@@ -165,7 +165,7 @@
         "Name": "Amazon.com Inc.",
         "Sector": "Consumer Discretionary",
         "Symbol": "AMZN",
-        "Mentions": 123
+        "Mentions": 107
     },
     {
         "Name": "Amcor plc",
@@ -285,7 +285,7 @@
         "Name": "Apple Inc.",
         "Sector": "Information Technology",
         "Symbol": "AAPL",
-        "Mentions": 55
+        "Mentions": 51
     },
     {
         "Name": "Applied Materials Inc.",
@@ -381,7 +381,7 @@
         "Name": "Bank of America Corp",
         "Sector": "Financials",
         "Symbol": "BAC",
-        "Mentions": 5
+        "Mentions": 4
     },
     {
         "Name": "Baxter International Inc.",
@@ -423,7 +423,7 @@
         "Name": "Boeing Company",
         "Sector": "Industrials",
         "Symbol": "BA",
-        "Mentions": 49
+        "Mentions": 47
     },
     {
         "Name": "Booking Holdings Inc",
@@ -519,7 +519,7 @@
         "Name": "Carnival Corp.",
         "Sector": "Consumer Discretionary",
         "Symbol": "CCL",
-        "Mentions": 8
+        "Mentions": 3
     },
     {
         "Name": "Carrier Global",
@@ -645,13 +645,13 @@
         "Name": "Cisco Systems",
         "Sector": "Information Technology",
         "Symbol": "CSCO",
-        "Mentions": 3
+        "Mentions": 2
     },
     {
         "Name": "Citigroup Inc.",
         "Sector": "Financials",
         "Symbol": "C",
-        "Mentions": 18
+        "Mentions": 15
     },
     {
         "Name": "Citizens Financial Group",
@@ -789,7 +789,7 @@
         "Name": "CVS Health",
         "Sector": "Health Care",
         "Symbol": "CVS",
-        "Mentions": 2
+        "Mentions": 1
     },
     {
         "Name": "D. R. Horton",
@@ -849,7 +849,7 @@
         "Name": "Diamondback Energy",
         "Sector": "Energy",
         "Symbol": "FANG",
-        "Mentions": 5
+        "Mentions": 4
     },
     {
         "Name": "Digital Realty Trust Inc",
@@ -897,7 +897,7 @@
         "Name": "Dominion Energy",
         "Sector": "Utilities",
         "Symbol": "D",
-        "Mentions": 7
+        "Mentions": 6
     },
     {
         "Name": "Domino's Pizza",
@@ -915,7 +915,7 @@
         "Name": "Dow Inc.",
         "Sector": "Materials",
         "Symbol": "DOW",
-        "Mentions": 25
+        "Mentions": 21
     },
     {
         "Name": "DTE Energy Co.",
@@ -939,7 +939,7 @@
         "Name": "DuPont de Nemours Inc",
         "Sector": "Materials",
         "Symbol": "DD",
-        "Mentions": 43
+        "Mentions": 39
     },
     {
         "Name": "DXC Technology",
@@ -969,7 +969,7 @@
         "Name": "eBay Inc.",
         "Sector": "Consumer Discretionary",
         "Symbol": "EBAY",
-        "Mentions": 64
+        "Mentions": 62
     },
     {
         "Name": "Ecolab Inc.",
@@ -1101,7 +1101,7 @@
         "Name": "Facebook Inc.",
         "Sector": "Communication Services",
         "Symbol": "FB",
-        "Mentions": 56
+        "Mentions": 54
     },
     {
         "Name": "Fastenal Co",
@@ -1161,7 +1161,7 @@
         "Name": "FLIR Systems",
         "Sector": "Information Technology",
         "Symbol": "FLIR",
-        "Mentions": 2
+        "Mentions": 1
     },
     {
         "Name": "Flowserve Corporation",
@@ -1179,7 +1179,7 @@
         "Name": "Ford Motor Company",
         "Sector": "Consumer Discretionary",
         "Symbol": "F",
-        "Mentions": 35
+        "Mentions": 34
     },
     {
         "Name": "Fortinet",
@@ -1239,7 +1239,7 @@
         "Name": "Gartner Inc",
         "Sector": "Information Technology",
         "Symbol": "IT",
-        "Mentions": 2682
+        "Mentions": 753
     },
     {
         "Name": "General Dynamics",
@@ -1335,7 +1335,7 @@
         "Name": "Hasbro Inc.",
         "Sector": "Consumer Discretionary",
         "Symbol": "HAS",
-        "Mentions": 508
+        "Mentions": 507
     },
     {
         "Name": "HCA Healthcare",
@@ -1359,7 +1359,7 @@
         "Name": "Hess Corporation",
         "Sector": "Energy",
         "Symbol": "HES",
-        "Mentions": 12
+        "Mentions": 11
     },
     {
         "Name": "Hewlett Packard Enterprise",
@@ -1593,7 +1593,7 @@
         "Name": "JPMorgan Chase & Co.",
         "Sector": "Financials",
         "Symbol": "JPM",
-        "Mentions": 32
+        "Mentions": 30
     },
     {
         "Name": "Juniper Networks",
@@ -1767,7 +1767,7 @@
         "Name": "Lowe's Cos.",
         "Sector": "Consumer Discretionary",
         "Symbol": "LOW",
-        "Mentions": 130
+        "Mentions": 44
     },
     {
         "Name": "LyondellBasell",
@@ -1863,7 +1863,7 @@
         "Name": "Merck & Co.",
         "Sector": "Health Care",
         "Symbol": "MRK",
-        "Mentions": 4
+        "Mentions": 2
     },
     {
         "Name": "MetLife Inc.",
@@ -1899,7 +1899,7 @@
         "Name": "Microsoft Corp.",
         "Sector": "Information Technology",
         "Symbol": "MSFT",
-        "Mentions": 117
+        "Mentions": 87
     },
     {
         "Name": "Mid-America Apartments",
@@ -1983,7 +1983,7 @@
         "Name": "Netflix Inc.",
         "Sector": "Communication Services",
         "Symbol": "NFLX",
-        "Mentions": 21
+        "Mentions": 19
     },
     {
         "Name": "Newell Brands",
@@ -2013,7 +2013,7 @@
         "Name": "NextEra Energy",
         "Sector": "Utilities",
         "Symbol": "NEE",
-        "Mentions": 2
+        "Mentions": 1
     },
     {
         "Name": "Nielsen Holdings",
@@ -2073,7 +2073,7 @@
         "Name": "Norwegian Cruise Line Holdings",
         "Sector": "Consumer Discretionary",
         "Symbol": "NCLH",
-        "Mentions": 11
+        "Mentions": 9
     },
     {
         "Name": "NRG Energy",
@@ -2091,7 +2091,7 @@
         "Name": "Nvidia Corporation",
         "Sector": "Information Technology",
         "Symbol": "NVDA",
-        "Mentions": 26
+        "Mentions": 22
     },
     {
         "Name": "NVR Inc",
@@ -2211,13 +2211,13 @@
         "Name": "Pfizer Inc.",
         "Sector": "Health Care",
         "Symbol": "PFE",
-        "Mentions": 11
+        "Mentions": 10
     },
     {
         "Name": "Philip Morris International",
         "Sector": "Consumer Staples",
         "Symbol": "PM",
-        "Mentions": 28
+        "Mentions": 24
     },
     {
         "Name": "Phillips 66",
@@ -2457,7 +2457,7 @@
         "Name": "Sealed Air",
         "Sector": "Materials",
         "Symbol": "SEE",
-        "Mentions": 107
+        "Mentions": 100
     },
     {
         "Name": "Sempra Energy",
@@ -2469,7 +2469,7 @@
         "Name": "ServiceNow",
         "Sector": "Information Technology",
         "Symbol": "NOW",
-        "Mentions": 512
+        "Mentions": 128
     },
     {
         "Name": "Sherwin-Williams",
@@ -2505,7 +2505,7 @@
         "Name": "Southern Company",
         "Sector": "Utilities",
         "Symbol": "SO",
-        "Mentions": 1266
+        "Mentions": 344
     },
     {
         "Name": "Southwest Airlines",
@@ -2667,7 +2667,7 @@
         "Name": "The Walt Disney Company",
         "Sector": "Communication Services",
         "Symbol": "DIS",
-        "Mentions": 47
+        "Mentions": 45
     },
     {
         "Name": "Thermo Fisher Scientific",
@@ -2715,7 +2715,7 @@
         "Name": "Twitter Inc.",
         "Sector": "Communication Services",
         "Symbol": "TWTR",
-        "Mentions": 30
+        "Mentions": 29
     },
     {
         "Name": "Tyson Foods",
@@ -2763,7 +2763,7 @@
         "Name": "United Airlines Holdings",
         "Sector": "Industrials",
         "Symbol": "UAL",
-        "Mentions": 8
+        "Mentions": 7
     },
     {
         "Name": "United Health Group Inc.",
@@ -2775,7 +2775,7 @@
         "Name": "United Parcel Service",
         "Sector": "Industrials",
         "Symbol": "UPS",
-        "Mentions": 24
+        "Mentions": 23
     },
     {
         "Name": "United Rentals Inc.",
@@ -2883,13 +2883,13 @@
         "Name": "Walgreens Boots Alliance",
         "Sector": "Consumer Staples",
         "Symbol": "WBA",
-        "Mentions": 32
+        "Mentions": 26
     },
     {
         "Name": "Walmart",
         "Sector": "Consumer Staples",
         "Symbol": "WMT",
-        "Mentions": 323
+        "Mentions": 295
     },
     {
         "Name": "Waste Management Inc.",
@@ -2901,7 +2901,7 @@
         "Name": "Waters Corporation",
         "Sector": "Health Care",
         "Symbol": "WAT",
-        "Mentions": 9
+        "Mentions": 8
     },
     {
         "Name": "WEC Energy Group",
@@ -2913,13 +2913,13 @@
         "Name": "Wells Fargo",
         "Sector": "Financials",
         "Symbol": "WFC",
-        "Mentions": 3
+        "Mentions": 1
     },
     {
         "Name": "Welltower Inc.",
         "Sector": "Real Estate",
         "Symbol": "WELL",
-        "Mentions": 228
+        "Mentions": 31
     },
     {
         "Name": "West Pharmaceutical Services",
@@ -2949,7 +2949,7 @@
         "Name": "Weyerhaeuser",
         "Sector": "Real Estate",
         "Symbol": "WY",
-        "Mentions": 3
+        "Mentions": 2
     },
     {
         "Name": "Whirlpool Corp.",
