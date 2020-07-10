@@ -2,6 +2,7 @@ import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import values from "./s&p500.json";
+import companies from "./snpMentioned.json"
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
@@ -49,6 +50,11 @@ const columns = [
     text: "Company Sector",
   },
   {
+    dataField: "Mentions",
+    text: "Popularity Index",
+    sort: true,
+  },
+  {
     dataField: "rank",
     text: "Rank",
     sort: true,
@@ -63,7 +69,7 @@ const columns = [
 ];
 
 export default () => (
-  <ToolkitProvider keyField="rank" data={values} columns={columns} search>
+  <ToolkitProvider keyField="rank" data={companies} columns={columns} search>
     {(props) => (
       <div>
         <h3>Search for company or ticker:</h3>
@@ -71,7 +77,7 @@ export default () => (
         <hr />
         <BootstrapTable
           keyField="rank"
-          data={values}
+          data={companies}
           columns={columns}
           pagination={paginationFactory(options)}
           {...props.baseProps}
