@@ -8,7 +8,7 @@ with open('./c-Daily Discussion Thread for July 09, 2020-RAW.json', 'r') as f:
 with open ('./c-What Are Your Moves Tomorrow, July 09, 2020-RAW.json', 'r') as f2:
     data2 = json.load(f2)
 
-with open('./s&p500editable.json', 'r') as s:
+with open('./companyGeneral.json', 'r') as s:
     snp = json.load(s)
 
 commonWords = ["i", "it", "a", "see", "so", "now", "low", "well", "all", "the", "and", "or", "yes", "no", "for", "if", "let's", "see", "of", "in", "more", "if", "not", "your", "daily", "all", "year", "buy", "sell", "call", "put", "a", "are", "all"]
@@ -43,7 +43,7 @@ for company in snp:
 for entry in entryID:
     for index in data[entry]:
         for company in snp:
-            lowercaseSymbol = company["Symbol"].lower()
+            lowercaseSymbol = company["ACT Symbol"].lower()
             if lowercaseSymbol in index["Text-Array"]:
                 company["Mentions"] += 1
             ticker = "$" + lowercaseSymbol
@@ -70,10 +70,10 @@ for entry in entryID:
 for entry in entryID:
     for index in data2[entry]:
         for company in snp:
-            lowercaseSymbol = company["Symbol"].lower()
+            lowercaseSymbol = company["ACT Symbol"].lower()
             if lowercaseSymbol in index["Text-Array"]:
                 company["Mentions"] += 1
 
 
-with open('snpMentioned.json', 'w') as outfile:
+with open('companyMentioned.json', 'w') as outfile:
     json.dump(snp, outfile)

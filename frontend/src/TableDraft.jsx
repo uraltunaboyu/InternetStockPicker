@@ -1,8 +1,8 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import values from "./s&p500.json";
-import companies from "./snpMentioned.json"
+import values from "./companyMentioned.json";
+import companies from "./companyMentioned.json"
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
@@ -36,19 +36,20 @@ const options = {
 
 const columns = [
   {
-    dataField: "Name",
+    dataField: "Company Name",
     text: "Company Name",
     sort: true,
   },
   {
-    dataField: "Symbol",
+    dataField: "ACT Symbol",
     text: "Ticker",
     sort: true,
   },
+  /*
   {
     dataField: "Sector",
     text: "Company Sector",
-  },
+  }, */
   {
     dataField: "Mentions",
     text: "Popularity Index",
