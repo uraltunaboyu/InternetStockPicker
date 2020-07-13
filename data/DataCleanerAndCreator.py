@@ -11,11 +11,18 @@ with open ('./c-What Are Your Moves Tomorrow, July 09, 2020-RAW.json', 'r') as f
 with open('./companyGeneral.json', 'r') as s:
     snp = json.load(s)
 
-commonWords = ["i", "it", "a", "see", "so", "now", "low", "well", "all", "the", "and", "or", "yes", "no", "for", "if", "let's", "see", "of", "in", "more", "if", "not", "your", "daily", "all", "year", "buy", "sell", "call", "put", "a", "are", "all"]
-capitalizedWords= []
+filename = "google-10000-english-usa.txt"
+  
+commonWords = []
+capitalCommonWords = []
+commonWordsFile = open(filename)
+
+for line in commonWordsFile:
+    commonWords.append(line.strip())
 
 for word in commonWords:
-    capitalizedWords.append(word.capitalize)
+    capitalCommonWords.append(word.capitalize())
+
 
 
 entryID = []
@@ -30,8 +37,9 @@ for entry in entryID:
         for word in words:
             if len(word) > 5:
                 words.remove(word)
-            if word in commonWords or word in capitalizedWords:
+            elif word in commonWords or word in capitalCommonWords:
                 words.remove(word)
+            ###
             word = word.lower()
         index["Text-Array"] = words
         #print(words)
@@ -63,7 +71,7 @@ for entry in entryID:
         for word in words:
             if len(word) > 5:
                 words.remove(word)
-            if word in commonWords:
+            elif word in commonWords or word in capitalCommonWords:
                 words.remove(word)
         index["Text-Array"] = words
 
