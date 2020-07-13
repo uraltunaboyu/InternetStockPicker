@@ -31,6 +31,9 @@ commonWordsFile = open(filename)
 for line in commonWordsFile:
     commonWords.append(line.strip())
 
+commonWords.append("I")
+commonWords.append("A")
+
 for word in commonWords:
     capitalCommonWords.append(word.capitalize())
 
