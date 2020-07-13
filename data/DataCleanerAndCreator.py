@@ -39,60 +39,45 @@ for word in commonWords:
 entryID = []
 for index in data:
     entryID.append(index)
-###I gnore this
+###Ignore this
 
+
+cleanEntry = []
 #Cleaning the data for comment source 1
 for entry in entryID: 
     for index in data[entry]:
         words = index["Text"].split()
-        for word in words:
-            if len(word) > 5:
-                words.remove(word)
-            elif word in commonWords or word in capitalCommonWords:
-                words.remove(word)
-            ###
-            word = word.lower()
-        index["Text-Array"] = words # Creates new text field of tokenized word array in each comment.
-        #print(words)
+        for i, word in enumerate(words):
+            if len(word) <= 5 and (word not in commonWords or word not in capitalCommonWords):
+                word = word.strip()
+                table = str.maketrans(dict.fromkeys(string.punctuation))  
+                word = word.translate(table)
+                cleanEntry.append(word)
 
 
-for company in comps: 
-    company["Mentions"] = 0 # Creates the json attribute for each company and resets them.
-
-for entry in entryID:
-    for index in data[entry]:
-        for company in comps:
-            lowercaseSymbol = company["ACT Symbol"].lower()
-            if lowercaseSymbol in index["Text-Array"]:
-                company["Mentions"] += 1
-            ticker = "$" + lowercaseSymbol
-            if ticker in index["Text-Array"]:
-                company["Mentions"] += 1
 
 entryID = []
 for index in data2:
     entryID.append(index)
-
-#Cleaning the data for comment source 2
-
+# Data from comment source 2
 for entry in entryID: 
     for index in data2[entry]:
-        index["Text"] = index["Text"].lower()
         words = index["Text"].split()
-        for word in words:
-            if len(word) > 5:
-                words.remove(word)
-            elif word in commonWords or word in capitalCommonWords:
-                words.remove(word)
-        index["Text-Array"] = words
+        for i, word in enumerate(words):
+            if len(word) <= 5 and (word not in commonWords or word not in capitalCommonWords):
+                word = word.strip()
+                table = str.maketrans(dict.fromkeys(string.punctuation))  
+                word = word.translate(table)
+                cleanEntry.append(word)
 
-for entry in entryID:
-    for index in data2[entry]:
-        for company in comps:
-            lowercaseSymbol = company["ACT Symbol"].lower()
-            if lowercaseSymbol in index["Text-Array"]:
-                company["Mentions"] += 1
+for company in comps: 
+    company["Mentions"] = 0 # Creates the json attribute for each company and resets them.
+
+for company in comps:
+    for word in cleanEntry:
+        if word == company["ACT Symbol"]:
+            company["Mentions"] += 1
 
 
 with open('companyMentioned.json', 'w') as outfile:
-    json.dump(comps, outfile)
+    json.dump(comps, outfile) 
