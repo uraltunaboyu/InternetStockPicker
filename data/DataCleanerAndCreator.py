@@ -19,7 +19,7 @@ with open('./c-Daily Discussion Thread for July 09, 2020-RAW.json', 'r') as f:
 with open ('./c-What Are Your Moves Tomorrow, July 09, 2020-RAW.json', 'r') as f2:
     data2 = json.load(f2)
 
-with open('./companyGeneral.json', 'r') as s:
+with open('./cleanedCompany.json', 'r') as s:
     comps = json.load(s)
 
 filename = "google-10000-english-usa.txt"
@@ -31,9 +31,6 @@ commonWordsFile = open(filename)
 for line in commonWordsFile:
     commonWords.append(line.strip())
 
-commonWords.append("I")
-commonWords.append("A")
-
 for word in commonWords:
     capitalCommonWords.append(word.capitalize())
 
@@ -42,36 +39,41 @@ for word in commonWords:
 entryID = []
 for index in data:
     entryID.append(index)
-###Ignore this
+# Preping for JSON parse
 
 
 cleanEntry = []
+
 #Cleaning the data for comment source 1
 for entry in entryID: 
     for index in data[entry]:
         words = index["Text"].split()
         for i, word in enumerate(words):
-            if len(word) <= 5 and (word not in commonWords or word not in capitalCommonWords):
-                word = word.strip()
-                table = str.maketrans(dict.fromkeys(string.punctuation))  
-                word = word.translate(table)
-                cleanEntry.append(word)
-
+            word = word.strip()
+            table = str.maketrans(dict.fromkeys(string.punctuation))  
+            word = word.translate(table)
+            if len(word) <= 5:
+                if word not in commonWords:
+                    if word not in capitalCommonWords:
+                        cleanEntry.append(word.strip())
 
 
 entryID = []
 for index in data2:
     entryID.append(index)
 # Data from comment source 2
+
 for entry in entryID: 
     for index in data2[entry]:
         words = index["Text"].split()
         for i, word in enumerate(words):
-            if len(word) <= 5 and (word not in commonWords or word not in capitalCommonWords):
-                word = word.strip()
-                table = str.maketrans(dict.fromkeys(string.punctuation))  
-                word = word.translate(table)
-                cleanEntry.append(word)
+            word = word.strip()
+            table = str.maketrans(dict.fromkeys(string.punctuation))  
+            word = word.translate(table)
+            if len(word) <= 5:
+                if word not in commonWords:
+                    if word not in capitalCommonWords:
+                        cleanEntry.append(word.strip())
 
 for company in comps: 
     company["Mentions"] = 0 # Creates the json attribute for each company and resets them.
