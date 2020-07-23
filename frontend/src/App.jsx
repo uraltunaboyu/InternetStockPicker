@@ -2,6 +2,7 @@ import React from "react";
 import MainGraph from "./MainGraph";
 import Navbar from "./Navigation";
 import TableDraft from "./TableDraft";
+import "bootswatch/dist/darkly/bootstrap.min.css";
 import { Container, Row } from 'react-bootstrap'
 
 class App extends React.Component {
