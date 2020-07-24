@@ -82,6 +82,10 @@ for company in comps:
     for word in cleanEntry:
         if word == company["ACT Symbol"]:
             company["Mentions"] += 1
+        dollarSymbol = "$" + company["ACT Symbol"]
+        if word == dollarSymbol:
+            company["Mentions"] += 1
+
 
 
 with open('companyMentioned.json', 'w') as outfile:
