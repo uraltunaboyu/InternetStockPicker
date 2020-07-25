@@ -28,7 +28,7 @@ massComments = []
 
 
 for subreddit in subreddits:
-    for submission in subreddit.top("week", limit=25):
+    for submission in subreddit.top("week", limit=50):
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
             massComments.append(comment.body)
