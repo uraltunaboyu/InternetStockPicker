@@ -1,6 +1,7 @@
 import praw
 from praw.models import MoreComments
 import json
+import time
 
 
 reddit = praw.Reddit(client_id="TA_VSbjQ6EIiBQ",
@@ -23,11 +24,18 @@ subreddits = [wsb, inv, secan, stocks, opt, rbh, cdi, bsb]
 
 massComments = []
 
-for subreddit in subreddits:
-   for submission in subreddit.hot(limit=25):
-        submission.comments.replace_more(limit=None)
-        for comment in submission.comments.list():
-            massComments.append(comment.body)
+
+
+while True:
+    try:
+        for subreddit in subreddits:
+            for submission in subreddit.hot(limit=100):
+                submission.comments.replace_more(limit=None)
+                for comment in submission.comments.list():
+                    massComments.append(comment.body)
+        break
+    except:
+        time.sleep(60)
  
 with open("comments.txt", "w") as text_file:
     for comment in massComments:
