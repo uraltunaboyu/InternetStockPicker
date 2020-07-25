@@ -29,8 +29,6 @@ for subreddit in subreddits:
         for comment in submission.comments.list():
             massComments.append(comment.body)
  
-json_string = json.dumps(massComments)
-
-
-with open('comments.json', 'w') as f:
-    json.dump(json_string, f)
+with open("comments.txt", "w") as text_file:
+    for comment in massComments:
+        text_file.write(comment)
