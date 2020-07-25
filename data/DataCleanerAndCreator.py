@@ -20,7 +20,7 @@ with open ('./c-What Are Your Moves Tomorrow, July 09, 2020-RAW.json', 'r') as f
     data2 = json.load(f2)
 
 with open ('./comments.txt', 'r') as f3:
-    extraCom = f3.read()
+    extraCom = f3.readlines()
 
 with open('./cleanedCompany.json', 'r') as s:
     comps = json.load(s)
@@ -76,7 +76,7 @@ for entry in entryID:
             if len(word) <= 5:
                 if word not in commonWords:
                     if word not in capitalCommonWords:
-                        cleanEntry.append(word.strip())
+                        cleanEntry.append(word.strip()) 
 
 for line in extraCom:
     words = line.split()
@@ -105,4 +105,4 @@ for company in comps:
 
 
 with open('companyMentioned.json', 'w') as outfile:
-    json.dump(comps, outfile) 
+    json.dump(comps, outfile)  
