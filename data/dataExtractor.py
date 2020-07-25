@@ -26,16 +26,13 @@ massComments = []
 
 
 
-while True:
-    try:
-        for subreddit in subreddits:
-            for submission in subreddit.hot(limit=100):
-                submission.comments.replace_more(limit=None)
-                for comment in submission.comments.list():
-                    massComments.append(comment.body)
-        break
-    except:
-        time.sleep(60)
+
+for subreddit in subreddits:
+    for submission in subreddit.top("week", limit=25):
+        submission.comments.replace_more(limit=None)
+        for comment in submission.comments.list():
+            massComments.append(comment.body)
+
  
 with open("comments.txt", "w") as text_file:
     for comment in massComments:
