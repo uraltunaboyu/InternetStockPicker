@@ -23,6 +23,7 @@ filename = "google-10000-english-usa.txt"
   
 commonWords = []
 capitalCommonWords = []
+acronymReddit = ["DD", "USA", "FD"]
 commonWordsFile = open(filename)
 
 for line in commonWordsFile:
@@ -46,7 +47,8 @@ for line in extraCom:
             if len(word) <= 5:
                 if word not in commonWords:
                     if word not in capitalCommonWords:
-                        cleanEntry.append(word.strip())
+                        if word not in acronymReddit:
+                            cleanEntry.append(word.strip())
 
 
 

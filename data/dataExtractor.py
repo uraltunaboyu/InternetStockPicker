@@ -32,6 +32,10 @@ for subreddit in subreddits:
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
             massComments.append(comment.body)
+    for submission in subreddit.hot(limit=10):
+        submission.comments.replace_more(limit=None)
+        for comment in submission.comments.list():
+            massComments.append(comment.body)
 
  
 with open("comments.txt", "w") as text_file:
