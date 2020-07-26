@@ -34,18 +34,13 @@ massComments = []
 
 
 for subreddit in subreddits:
-    for submission in subreddit.top("week", limit=40):
+    for submission in subreddit.hot(limit=50):
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
             massComments.append(comment.body)
-    for submission in subreddit.hot(limit=10):
-        submission.comments.replace_more(limit=None)
-        for comment in submission.comments.list():
-            massComments.append(comment.body) 
 
- # Above code gets all comments from the top 50 submissions of the week from the subreddits.
- # Secondly, it gets the comments from the top 10 hot posts (including stickies with large number of comments)
- # This a compromise. Ideally it would cover weekly top 100.
+ # Above code gets all comments from the top 50 submissions of the day from the subreddits.
+ # This a compromise. Ideally it would cover daily top 100.
 
 
 with open("comments.txt", "w") as text_file:
