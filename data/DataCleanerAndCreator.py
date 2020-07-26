@@ -12,7 +12,7 @@ import string
 with open ('./comments.txt', 'r') as f3:
     extraCom = f3.readlines()
 
-with open('./cleanedCompany.json', 'r') as s:
+with open('./companyMentioned.json', 'r') as s:
     comps = json.load(s)
 
 filename = "google-10000-english-usa.txt"
