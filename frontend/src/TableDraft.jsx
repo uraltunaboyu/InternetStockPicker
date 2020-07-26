@@ -51,22 +51,22 @@ const columns = [
     text: "Company Sector",
   }, */
   {
-    dataField: "Mentions",
-    text: "Popularity Index",
-    sort: true,
-  },
-  {
-    dataField: "rank",
+    dataField: "CurrentRank",
     text: "Rank",
     sort: true,
     searchable: false,
   },
   {
-    dataField: "lastrank",
+    dataField: "LastRank",
     text: "Last Rank",
     sort: true,
     searchable: false,
   },
+  {
+    dataField: "ChangeInRank",
+    text: "Rank Change",
+    sort: true,
+  }
 ];
 
 export default () => (
