@@ -49,6 +49,13 @@ for line in extraCom:
 # Above code determines which words MAY be tickers. It removes punctuation and checks for length. 
 # Furthermore, if they are NOT in common or capitalCommonWords, the words are added the cleanEntry, final step before Ticker check.
 
+
+for company in comps:
+    company["Mentions"] = 0
+
+# Resetting mentions without resetting ranks so they don't accumulate.
+
+
 for company in comps:
     for word in cleanEntry:
         if word == company["ACT Symbol"]:
