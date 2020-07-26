@@ -1,7 +1,6 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import values from "./companyMentioned.json";
 import companies from "./companyMentioned.json"
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -21,7 +20,7 @@ const sizePerPageRenderer = ({
           key={option.text}
           type="button"
           onClick={() => onSizePerPageChange(option.page)}
-          className={`btn ${isSelected ? "btn-primary" : "btn-light"}`}
+          className={`btn page-link ${isSelected ? "active" : ""}`}
         >
           {option.text}
         </button>
@@ -45,11 +44,6 @@ const columns = [
     text: "Ticker",
     sort: true,
   },
-  /*
-  {
-    dataField: "Sector",
-    text: "Company Sector",
-  }, */
   {
     dataField: "CurrentRank",
     text: "Rank",

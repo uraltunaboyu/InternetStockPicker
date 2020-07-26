@@ -1,7 +1,7 @@
 import React from "react";
 import dummyVals from "./dummy";
 import Graph from "./Graph.jsx";
-import { Col } from "react-bootstrap";
+import { Col, Card, ListGroup } from "react-bootstrap";
 
 class MainGraph extends React.Component {
   constructor(props) {
@@ -15,6 +15,21 @@ class MainGraph extends React.Component {
     return (
       <>
         <Col>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                Search:
+              </Card.Title>
+              <ListGroup variant="flush">
+                {this.state.graphValues.map(entry => {
+                  return(<ListGroup.Item>{entry.name}
+                  <i class="fas fa-trash"></i></ListGroup.Item>);
+                })}
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={12} md={8}>
           <Graph data={this.state.graphValues} />
         </Col>
       </>

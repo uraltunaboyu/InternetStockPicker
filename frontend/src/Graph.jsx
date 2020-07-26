@@ -4,6 +4,11 @@ import { Line } from "react-chartjs-2";
 class Graph extends React.Component {
   initialState = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
+    options: {
+      legend: {
+        display: false
+      }
+    },
     datasets: this.props.data.map(entry => {
       return(
         {
@@ -38,15 +43,10 @@ class Graph extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.state)
-  }
-
   render() {
     return (
       <>
-        <h2>{this.props.graphTitle}</h2>
-        <Line data={this.state.data} />
+        <Line data={this.state.data} options={this.state.data.options}/>
       </>
     );
   }
