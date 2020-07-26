@@ -11,6 +11,9 @@ reddit = praw.Reddit(client_id="TA_VSbjQ6EIiBQ",
                      password="rhic_yaik6NON!scey" 
 )
 
+# Creation of reddit instance
+# Actual login info should NOT be on Github
+
 wsb = reddit.subreddit("wallstreetbets")
 inv = reddit.subreddit("investing")
 secan = reddit.subreddit("SecurityAnalysis")
@@ -22,22 +25,29 @@ bsb = reddit.subreddit("Baystreetbets")
 
 subreddits = [wsb, inv, secan, stocks, opt, rbh, cdi, bsb]
 
+# List of subreddits to check comments from.
+
+
 massComments = []
 
-
+# This list will hold on comments.
 
 
 for subreddit in subreddits:
-    for submission in subreddit.top("week", limit=50):
+    for submission in subreddit.top("week", limit=40):
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
             massComments.append(comment.body)
     for submission in subreddit.hot(limit=10):
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
-            massComments.append(comment.body)
+            massComments.append(comment.body) 
 
- 
+ # Above code gets all comments from the top 50 submissions of the week from the subreddits.
+ # Secondly, it gets the comments from the top 10 hot posts (including stickies with large number of comments)
+ # This a compromise. Ideally it would cover weekly top 100.
+
+
 with open("comments.txt", "w") as text_file:
     for comment in massComments:
         text_file.write(comment)

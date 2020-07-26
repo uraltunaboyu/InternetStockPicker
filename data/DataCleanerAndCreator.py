@@ -4,13 +4,9 @@ import string
 
 
 
-# This program imports the comment datasets, the companies, and the common words.
-# It transfers the words in each line of the google-10000-english-usa.txt into commonWords.
-# This is replicated for capitalCommonWords to check for capitalized 'And' etc.
-# Then it tokenizes each word in each comment from the sources.
-# Then it checks if these tokens are longer than 5 characters (max length of stock tickers), if so, removes them.
-# Then it checks if the token word is in the commonWords list of the capitalCommonWords list, if so, removes them.
-# Then it cross-references the word with the ACT Symbols of each company in the company json.
+# This script imports the comments.txt from dataExtractor.py,
+# the cleanCompany.json from CompanyFixer.py,
+# and google-10000-english-usa.txt to check for common words.
 
 
 with open ('./comments.txt', 'r') as f3:
@@ -32,7 +28,7 @@ for line in commonWordsFile:
 for word in commonWords:
     capitalCommonWords.append(word.capitalize())
 
-#### Above code transfers the common words into the program. Creates two dictionaries for the words, lowercase and capitalized
+# Above code transfers the common words into the program. Creates two dictionaries for the words, lowercase and capitalized
 
 
 cleanEntry = []
@@ -50,10 +46,8 @@ for line in extraCom:
                         if word not in acronymReddit:
                             cleanEntry.append(word.strip())
 
-
-
-for company in comps: 
-    company["Mentions"] = 0 # Creates the json attribute for each company and resets them.
+# Above code determines which words MAY be tickers. It removes punctuation and checks for length. 
+# Furthermore, if they are NOT in common or capitalCommonWords, the words are added the cleanEntry, final step before Ticker check.
 
 for company in comps:
     for word in cleanEntry:
@@ -63,7 +57,34 @@ for company in comps:
         if word == dollarSymbol:
             company["Mentions"] += 1
 
+# Above snippet adds Mentions if words, or words when a $ is added to them, match Ticker symbols.
 
+def extractMentions(json):
+    try:
+        return int(json['Mentions'])
+    except KeyError:
+        return 0
+
+# This function returns the value of Mentions.
+
+comps.sort(key=extractMentions, reverse=True)
+
+# This line sorts the comps (to-be-written as companyMentioned.json) by Mentions
+
+i = 1
+
+for company in comps:
+    company["LastRank"] = company["CurrentRank"]
+    company["CurrentRank"] = i
+    if company["LastRank"] != "NONE":
+        company["ChangeInRank"] = company["CurrentRank"] - company["LastRank"]
+        if company["ChangeInRank"] > 0:
+            company["ChangeinRank"] = "+" + str(company["ChangeInRank"])
+    else:
+        company["ChangeInRank"] = "+" + str(company["CurrentRank"])
+    i += 1
+
+# CurrentRank is calculated after being transfered to LastRank
 
 with open('companyMentioned.json', 'w') as outfile:
     json.dump(comps, outfile)  
