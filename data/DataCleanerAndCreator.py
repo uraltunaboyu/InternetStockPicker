@@ -19,7 +19,7 @@ filename = "google-10000-english-usa.txt"
   
 commonWords = []
 capitalCommonWords = []
-acronymReddit = ["DD", "USA", "FD"]
+acronymReddit = ["DD", "USA", "FD", "CEO"]
 commonWordsFile = open(filename)
 
 for line in commonWordsFile:

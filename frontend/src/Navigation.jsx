@@ -13,7 +13,7 @@ moment().format();
 export default function Navigation(props) {
   return (
     <Navbar expand="lg" variant="dark" bg="dark" fixed="top">
-      <Navbar.Brand href="#home">InternetStockPicker</Navbar.Brand>
+      <Navbar.Brand href="#home">InternetStockPicks</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
