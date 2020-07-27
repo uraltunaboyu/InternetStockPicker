@@ -17,7 +17,7 @@ export default function Navigation(props) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavDropdown title="Select a Week" id="basic-nav-dropdown">
+          <NavDropdown title="Select a Day" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">
               {moment().startOf("isoWeek").format("MMMM Do YYYY")}
             </NavDropdown.Item>
@@ -34,7 +34,8 @@ export default function Navigation(props) {
                 .format("MMMM Do YYYY")}
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="#home">Tables</Nav.Link>
+          <Nav.Link href="#home">Table</Nav.Link>
+          <Nav.Link href="#home">Detailed Analysis</Nav.Link>
           <Nav.Link href="#footer">About us</Nav.Link>
         </Nav>
         <Form inline>
