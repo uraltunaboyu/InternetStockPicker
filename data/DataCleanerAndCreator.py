@@ -84,9 +84,9 @@ for company in comps:
     company["LastRank"] = company["CurrentRank"]
     company["CurrentRank"] = i
     if company["LastRank"] != "NONE":
-        company["ChangeInRank"] = company["CurrentRank"] - company["LastRank"]
+        company["ChangeInRank"] = company["LastRank"] - company["CurrentRank"]
         if company["ChangeInRank"] > 0:
-            company["ChangeinRank"] = "+" + str(company["ChangeInRank"])
+            company["ChangeInRank"] = "+" + str(company["ChangeInRank"])
     else:
         company["ChangeInRank"] = "+" + str(company["CurrentRank"])
     i += 1
