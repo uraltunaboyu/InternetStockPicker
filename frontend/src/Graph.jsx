@@ -1,15 +1,15 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-class Graph extends React.Component {
-  initialState = {
+export default function Graph(props) {
+  const data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     options: {
       legend: {
         display: false
       }
     },
-    datasets: this.props.data.map(entry => {
+    datasets: props.data.map(entry => {
       return(
         {
           label: entry.name,
@@ -36,20 +36,9 @@ class Graph extends React.Component {
     })
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: this.initialState
-    };
-  }
-
-  render() {
     return (
       <>
-        <Line data={this.state.data} options={this.state.data.options}/>
+        <Line data={data} options={data.options}/>
       </>
     );
-  }
 }
-
-export default Graph;

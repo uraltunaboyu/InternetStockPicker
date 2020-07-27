@@ -25,7 +25,7 @@ class MainGraph extends React.Component {
 
   removeFromGraph(ticker) {
     const newGraphValues = this.state.graphValues.filter(value => {
-      return value.ticker != ticker
+      return value.ticker !== ticker
     })
     this.setState({
       graphValues: newGraphValues
