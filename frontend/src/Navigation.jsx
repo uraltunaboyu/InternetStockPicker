@@ -18,24 +18,39 @@ export default function Navigation(props) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavDropdown title="Select a Day" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">
-              {moment().startOf("isoWeek").format("MMMM Do YYYY")}
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              {moment()
-                .subtract(1, "weeks")
-                .startOf("isoWeek")
-                .format("MMMM Do YYYY")}
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">
-              {moment()
-                .subtract(2, "weeks")
-                .startOf("isoWeek")
-                .format("MMMM Do YYYY")}
-            </NavDropdown.Item>
+            <NavDropdown title={moment().startOf("isoWeek").format("MMMM Do YYYY")} id="basic-nav-dropdown">
+              <NavDropdown.Item>
+                {moment()
+                  .subtract(4, "day")
+                  .startOf("isoWeek")
+                  .format("MMMM Do YYYY")}
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title={moment()
+              .subtract(1, "weeks")
+              .startOf("isoWeek")
+              .format("MMMM Do YYYY")} href="#action/3.2">
+              <NavDropdown.Item>
+                {moment()
+                  .subtract(4, "day")
+                  .startOf("isoWeek")
+                  .format("MMMM Do YYYY")}
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title={moment()
+              .subtract(2, "weeks")
+              .startOf("isoWeek")
+              .format("MMMM Do YYYY")} href="#action/3.3">
+              <NavDropdown.Item>
+                {moment()
+                  .subtract(4, "day")
+                  .startOf("isoWeek")
+                  .format("MMMM Do YYYY")}
+              </NavDropdown.Item>
+            </NavDropdown>
           </NavDropdown>
           <Nav.Link href="#home">Table</Nav.Link>
-          <Nav.Link href="#home">Detailed Analysis</Nav.Link>
+          <Nav.Link href="#detan">Detailed Analysis</Nav.Link>
           <Nav.Link href="#footer">About us</Nav.Link>
         </Nav>
         <Form inline>
