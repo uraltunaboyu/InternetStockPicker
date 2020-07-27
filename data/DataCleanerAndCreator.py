@@ -12,7 +12,7 @@ import string
 with open ('./comments.txt', 'r') as f3:
     extraCom = f3.readlines()
 
-with open('./cleanedCompany.json', 'r') as s:
+with open('./companyMentioned.json', 'r') as s:
     comps = json.load(s)
 
 filename = "google-10000-english-usa.txt"
@@ -49,6 +49,13 @@ for line in extraCom:
 # Above code determines which words MAY be tickers. It removes punctuation and checks for length. 
 # Furthermore, if they are NOT in common or capitalCommonWords, the words are added the cleanEntry, final step before Ticker check.
 
+
+for company in comps:
+    company["Mentions"] = 0
+
+# Resetting mentions without resetting ranks so they don't accumulate.
+
+
 for company in comps:
     for word in cleanEntry:
         if word == company["ACT Symbol"]:
@@ -77,9 +84,9 @@ for company in comps:
     company["LastRank"] = company["CurrentRank"]
     company["CurrentRank"] = i
     if company["LastRank"] != "NONE":
-        company["ChangeInRank"] = company["CurrentRank"] - company["LastRank"]
+        company["ChangeInRank"] = company["LastRank"] - company["CurrentRank"]
         if company["ChangeInRank"] > 0:
-            company["ChangeinRank"] = "+" + str(company["ChangeInRank"])
+            company["ChangeInRank"] = "+" + str(company["ChangeInRank"])
     else:
         company["ChangeInRank"] = "+" + str(company["CurrentRank"])
     i += 1
