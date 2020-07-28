@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import string
+import os
 
 
 
@@ -95,3 +96,4 @@ for company in comps:
 
 with open('companyMentioned.json', 'w') as outfile:
     json.dump(comps, outfile)  
+
