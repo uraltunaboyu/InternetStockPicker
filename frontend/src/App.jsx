@@ -16,10 +16,10 @@ class App extends React.Component {
       <div className="App">
         <Navbar />
         <Container>
-          <Row>
+          <Row id="graph">
             <MainGraph />
           </Row>
-          <Row>
+          <Row id="table">
             <TableDraft />
           </Row>
         </Container>

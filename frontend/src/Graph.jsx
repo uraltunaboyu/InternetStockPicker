@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 
 export default function Graph(props) {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["Monday", "Tuesday", "Wednesday"],
     options: {
       legend: {
         display: false
@@ -12,8 +12,8 @@ export default function Graph(props) {
     datasets: props.data.map(entry => {
       return(
         {
-          label: entry.name,
-          data: entry.values,
+          label: entry["Company Name"],
+          data: [entry["Mentions"], entry["Mentions"], entry["Mentions"]],
           fill: false,
           lineTension: 0.1,
           backgroundColor: "rgba(75, 192, 192, 0.4)",

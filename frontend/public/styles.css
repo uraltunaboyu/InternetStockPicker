@@ -16,3 +16,7 @@ footer {
 .fa-trash {
     float:right;
 }
+
+#graph {
+    padding-bottom: 75px;
+}
