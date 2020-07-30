@@ -3,6 +3,7 @@ import json
 import string
 import praw
 from praw.models import MoreComments
+from prawcore.exceptions import RequestException
 from alpha_vantage.timeseries import TimeSeries
 import time
 from decimal import *
@@ -39,10 +40,20 @@ massComments = []
 print('\n###    Gathering comments  ###\n')
 
 for subreddit in subreddits:
-    for submission in subreddit.hot(limit=50):
-        submission.comments.replace_more(limit=None)
-        for comment in submission.comments.list():
-            massComments.append(comment.body)
+    try:
+        for submission in subreddit.hot(limit=50):
+            try:
+                submission.comments.replace_more(limit=None)
+                for comment in submission.comments.list():
+                    massComments.append(comment.body)
+            except RequestException:
+                print("Request timed out while gathering data from " + submission + ".\n")
+                print("Moving on to the next one.\n")
+                pass    
+    except RequestException:
+        print("Request timed out while gathering data from " + subreddit + ".\n")
+        print("Moving on to the next one.\n")
+        pass
 
  # Above code gets all comments from the top 50 submissions of the day from the subreddits.
  # This a compromise. Ideally it would cover daily top 100.
@@ -54,7 +65,7 @@ with open("comments.txt", "w") as text_file:
 
 print('\n###    Comments downloaded successfully    ###\n')
 
-
+print('\n###    Updating mentions and ranks    ###\n')
 
 with open ('./comments.txt', 'r') as f3:
     extraCom = f3.readlines()
@@ -66,7 +77,7 @@ filename = "google-10000-english-usa.txt"
   
 commonWords = []
 capitalCommonWords = []
-acronymReddit = ["DD", "USA", "FD", "CEO"]
+acronymReddit = ["DD", "USA", "FD", "CEO", "GDP"]
 commonWordsFile = open(filename)
 
 for line in commonWordsFile:
@@ -144,7 +155,7 @@ with open('companyMentioned.json', 'w') as outfile:
     json.dump(comps, outfile)  
 
 
-print('\n###Mentions and ranks updated successfully###\n')
+print('\n###    Mentions and ranks updated successfully    ###\n')
 
 
 
@@ -170,15 +181,19 @@ print('\n###    Gathering stock data    ###\n')
 i = 0
 for company in comps:
     if i < 50:
-        data, meta_data = ts.get_daily(symbol=company["ACT Symbol"], outputsize='full')
-        company["Open"] = data.iloc[0]['1. open']
-        company["Close"] = data.iloc[0]['4. close']
-        daily_change_dollar = Decimal( company["Close"] - company["Open"]).quantize(Decimal('.01'), rounding=ROUND_DOWN)
-        daily_change_percent = Decimal((100 * (company["Close"] - company["Open"]) / company["Open"])).quantize(Decimal('.01'), rounding=ROUND_DOWN)
-        company["Daily Change $"] = str(daily_change_dollar)
-        company["Daily Change %"] = str(daily_change_percent)
-        i += 1
-        time.sleep(12)
+        try:
+            data, meta_data = ts.get_daily(symbol=company["ACT Symbol"], outputsize='full')
+            company["Open"] = data.iloc[0]['1. open']
+            company["Close"] = data.iloc[0]['4. close']
+            daily_change_dollar = Decimal( company["Close"] - company["Open"]).quantize(Decimal('.01'), rounding=ROUND_DOWN)
+            daily_change_percent = Decimal((100 * (company["Close"] - company["Open"]) / company["Open"])).quantize(Decimal('.01'), rounding=ROUND_DOWN)
+            company["Daily Change $"] = str(daily_change_dollar)
+            company["Daily Change %"] = str(daily_change_percent)
+            i += 1
+            time.sleep(12)
+        except ValueError:
+            print("Failed to get data on " + company + ", moving on to next one.\n")
+            pass
 
 closedComps = []
 
