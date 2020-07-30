@@ -4,6 +4,7 @@ import string
 
 
 
+
 # This script imports the comments.txt from dataExtractor.py,
 # the cleanCompany.json from CompanyFixer.py,
 # and google-10000-english-usa.txt to check for common words.
@@ -19,7 +20,7 @@ filename = "google-10000-english-usa.txt"
   
 commonWords = []
 capitalCommonWords = []
-acronymReddit = ["DD", "USA", "FD"]
+acronymReddit = ["DD", "USA", "FD", "CEO"]
 commonWordsFile = open(filename)
 
 for line in commonWordsFile:
@@ -95,3 +96,4 @@ for company in comps:
 
 with open('companyMentioned.json', 'w') as outfile:
     json.dump(comps, outfile)  
+

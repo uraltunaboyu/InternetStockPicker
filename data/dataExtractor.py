@@ -1,7 +1,6 @@
 import praw
 from praw.models import MoreComments
 import json
-import time
 
 
 reddit = praw.Reddit(client_id="TA_VSbjQ6EIiBQ",
