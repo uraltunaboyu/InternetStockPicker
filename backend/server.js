@@ -1,75 +1,75 @@
 "use strict";
 
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const fs = require('fs');
+const logger = require('morgan');
+const Data = require('./data');
 const cors = require('cors');
+require('dotenv').config();
 
 
 app.use(cors());
+const router = express.Router();
+
+const dbRoute = process.env.MONGO_URI;
+mongoose.connect(dbRoute, {useNewUrlParser: true});
+
+
+let db = mongoose.connection;
+
+db.once('open', () => console.log('Database connection successful.'));
+db.once('error', console.error.bind(console, 'MongoDB connection error.'));
+
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(logger('dev'));
+
+router.get('/getData', (req, res) => {
+    Data.find((err, data) => {
+        if (err) return res.json({success: false, error: err});
+        return res.json({ success: true, data: data})
+    });
+});
+
+router.post('/putData', (req, res) => {
+    let data = new Data();
+
+    const { Symbol, CompanyName, Rank, RankChange } = req.body;
+
+    if (!Symbol || !CompanyName || !Rank || !RankChange) {
+        return res.json({
+            success: false,
+            error: req.body
+        });
+    }
+    data.Symbol = Symbol;
+    data.CompanyName = CompanyName;
+    data.Rank = Rank;
+    data.RankChange = RankChange;
+    data.save(err => {
+        if (err) return res.json({success: false, error: err});
+        return res.json({success: true});
+    })
+});
+
+app.use('/api', router);
+
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve('../frontend/public/index.html'));
-    //res.send("API is working properly");
 });
 
-app.get('/download/nasdaq', (req, res) => {
-
-    fs.readFile(path.resolve('../data/nasdaq.json'), (err, json) => {
-        let obj = JSON.parse(json);
-        res.json(obj);
-    });
-
-});
-
-app.get('/download/nyse', (req, res) => {
-
-    fs.readFile(path.resolve('../data/nyse.json'), (err, json) => {
-        let obj = JSON.parse(json);
-        res.json(obj);
-    });
-
-});
-
-app.get('/download/others', (req, res) => {
-
-    fs.readFile(path.resolve('../data/others-listed.json'), (err, json) => {
-        let obj = JSON.parse(json);
-        res.json(obj);
-    });
-
-});
-
-/*
-app.get('/404', function (req, res, next) {
-    // trigger a 404 since no other middleware
-    // will match /404 after this one, and we're not
-    // responding here
-    next();
-});
-
-app.get('/403', function (req, res, next) {
-    // trigger a 403 error
-    var err = new Error('not allowed!');
-    err.status = 403;
-    next(err);
-});
-
-app.get('/500', function (req, res, next) {
-    // trigger a generic (500) error
-    next(new Error('Server error? Oops.'));
-});
-*/
-
-// Error handling to be done later. Missing routes and files.
-// Taken from example error page of express.js 
 
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!")
+    res.status(404).send("Sorry, can't find that!")
 })
 
 
