@@ -1,0 +1,23 @@
+server {
+   listen 80 default_server;
+   root /var/www/InternetStockPicker/frontend/build;
+   server_name internetstockpicks.com;
+   index index.html;
+   location / {
+   }
+}
+
+server {
+	listen 443 ssl;
+	ssl_certificate /etc/ssl/isp.com.pem;
+	ssl_certificate_key /etc/ssl/isp.com.key;
+
+	server_name internetstockpicks.com;
+	access_log /var/log/nginx/nginx.vhost.access.log;
+	error_log /var/log/nginx.vhost.error.log;
+
+	location / {
+		root /var/www/InternetStockPicker/frontend/build;
+		index index.html;
+	}
+}
