@@ -1,23 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DataSchema = new Schema(
+const dataSchema = new Schema(
   {
     Symbol: {
       type: String,
-      unique: true,
       index: true
     },
     CompanyName: {
       type: String,
-      unique: true
     },
     Rank: {
-      type: Number,
-      unique: true
+      type: Number
     },
-    RankChange: Number
+    RankChange: Number,
+    Date: {
+      type: Date,
+      index:true
+    }
   }
 );
 
-module.exports = mongoose.model("Data", DataSchema);
+module.exports = mongoose.model("Data", dataSchema);
