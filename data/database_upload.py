@@ -6,8 +6,8 @@ data_to_post = []
 date = datetime.datetime.now()
 
 try:
-  companyMentioned = json.load(open(f"companyMentioned{date: %d %b %Y}.json", "r"))
-  companyMentioned_stock = json.load(open(f"companyMentioned_Stock{date: %d %b %Y}.json", "r"))
+  companyMentioned = json.load(open(f"companyMentioned.json", "r"))
+  companyMentioned_stock = json.load(open(f"companyMentioned_Stock.json", "r"))
 except FileNotFoundError:
   print("Up to date company data could not be found, exiting...")
   quit()
