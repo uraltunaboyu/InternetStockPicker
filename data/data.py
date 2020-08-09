@@ -1,24 +1,23 @@
-import pandas as pd
+import os
+import requests
+import concurrent.futures
 import json
 import string
+import datetime
 import praw
 from praw.models import MoreComments
 from prawcore.exceptions import RequestException
 from alpha_vantage.timeseries import TimeSeries
 import time
-from decimal import *
+from decimal import Decimal, ROUND_DOWN
 
+date = datetime.datetime.now()
+datestring = f"{date:%d}{date:%b}{date:%Y}"
+comments_file_name = f"comments_{datestring}.txt"
 
-reddit = praw.Reddit(client_id="TA_VSbjQ6EIiBQ",
-                     client_secret="LGXVe-Kc623A4nvDhV3_MsmW04k",
-                     user_agent="Reddit Scraper",
-                     username="justherefortheapi", 
-                     password="rhic_yaik6NON!scey" 
-)
+reddit = praw.Reddit("user")
 
 # Creation of reddit instance
-# Actual login info should NOT be on Github
-
 wsb = reddit.subreddit("wallstreetbets")
 inv = reddit.subreddit("investing")
 secan = reddit.subreddit("SecurityAnalysis")
@@ -37,38 +36,45 @@ massComments = []
 
 # This list will hold on comments.
 
-print('\n###    Gathering comments  ###\n')
+def analyse_subreddit(subreddit):
+    limit = 50
+    analyzed = 1
+    subreddit_name = subreddit.display_name
+    submissions = subreddit.top(time_filter='day', limit=limit)
+    for submission in submissions:
+        submission.comments.replace_more(limit=None)
+        i = 0
+        try:
+            for comment in submission.comments.list():
+                massComments.append(comment.body)
+                i += 1
+            print("Analyzed submission {}/{} from r/{} with {} comments".format(analyzed, limit, subreddit_name, i))
+            analyzed += 1
+        except RequestException:
+            print("Request timed out while gathering data from r/{}".format(subreddit_name))
+            pass
+    return [len(massComments), subreddit_name]
 
-for subreddit in subreddits:
-    try:
-        for submission in subreddit.hot(limit=50):
-            try:
-                submission.comments.replace_more(limit=None)
-                for comment in submission.comments.list():
-                    massComments.append(comment.body)
-            except RequestException:
-                print("Request timed out while gathering data from " + submission + ".\n")
-                print("Moving on to the next one.\n")
-                pass    
-    except RequestException:
-        print("Request timed out while gathering data from " + subreddit + ".\n")
-        print("Moving on to the next one.\n")
-        pass
+if (not os.path.isfile(comments_file_name)):
+    start_time = time.time()
+    print('\n### Gathering comments ###\n')
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = []
+        for subreddit in subreddits:
+            print("Started analysis of", subreddit.display_name)
+            futures.append(executor.submit(analyse_subreddit, subreddit=subreddit))
+        for future in concurrent.futures.as_completed(futures):
+            print("Got {} comments from r/{}".format(future.result()[0], future.result()[1]))
+    with open(comments_file_name, "w", encoding="utf-8") as text_file:
+        for comment in massComments:
+            text_file.write(comment)
+    print("Analyzed {} subreddits in {} seconds, with {} comments.".format(len(subreddits), time.time() - start_time, len(massComments)))
+    print('\n###    Comments downloaded successfully    ###\n')
+else:
+    print(f"\n###    Comments file for {datestring} already exists, skipping download    ###\n")
 
- # Above code gets all comments from the top 50 submissions of the day from the subreddits.
- # This a compromise. Ideally it would cover daily top 100.
-
-
-with open("comments.txt", "w") as text_file:
-    for comment in massComments:
-        text_file.write(comment)
-
-print('\n###    Comments downloaded successfully    ###\n')
 
 print('\n###    Updating mentions and ranks    ###\n')
-
-with open ('./comments.txt', 'r') as f3:
-    extraCom = f3.readlines()
 
 with open('./companyMentioned.json', 'r') as s:
     comps = json.load(s)
@@ -81,9 +87,8 @@ acronymReddit = ["DD", "USA", "FD", "CEO", "GDP"]
 commonWordsFile = open(filename)
 
 for line in commonWordsFile:
-    commonWords.append(line.strip())
-
-for word in commonWords:
+    word = line.strip()
+    commonWords.append(word)
     capitalCommonWords.append(word.capitalize())
 
 # Above code transfers the common words into the program. Creates two dictionaries for the words, lowercase and capitalized
@@ -92,7 +97,7 @@ for word in commonWords:
 cleanEntry = []
 
 
-for line in extraCom:
+for line in massComments:
     words = line.split()
     for i, word in enumerate(words):
             word = word.strip()
@@ -162,12 +167,6 @@ print('\n###    Mentions and ranks updated successfully    ###\n')
 
 with open('./companyMentioned.json', 'r') as s:
     comps = json.load(s)
-
-def extractMentions(json):
-    try:
-        return int(json['Mentions'])
-    except KeyError:
-        return 0
 
 # This function returns the value of Mentions.
 
