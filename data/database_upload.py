@@ -34,23 +34,25 @@ for company in companies:
   if company["ACT Symbol"] in top_50_company_tickers:
     company = get_company_from_top_50(company["ACT Symbol"])
     data_to_post.append({
-      "Symbol": company["ACT Symbol"],
-      "CompanyName": company["Company Name"],
-      "Rank": company["CurrentRank"],
-      "RankChange": company["ChangeInRank"],
-      "StockOpen": company["Open"],
-      "StockClose": company["Close"],
-      "StockChangePercent": company["Daily Change %"],
-      "StockChangeDollar": company["Daily Change $"],
-      "Date": f"{date:%d %b %Y}"
+      "date": datetime.datetime.now(),
+      "symbol": company["ACT Symbol"],
+      "companyName": company["Company Name"],
+      "rank": company["CurrentRank"],
+      "rankChange": company["ChangeInRank"],
+      "stockData" : {
+        "stockOpen": company["Open"],
+        "stockClose": company["Close"],
+        "stockChangePercent": company["Daily Change %"],
+        "stockChangeDollar": company["Daily Change $"],
+      }
     })
   else :
     data_to_post.append({
-      "Symbol": company["ACT Symbol"],
-      "CompanyName": company["Company Name"],
-      "Rank": company["CurrentRank"],
-      "RankChange": company["ChangeInRank"],
-      "Date": f"{date:%d %b %Y}"
+      "date": datetime.datetime.now(),
+      "symbol": company["ACT Symbol"],
+      "companyName": company["Company Name"],
+      "rank": company["CurrentRank"],
+      "rankChange": company["ChangeInRank"]
     })
 
 result = parsedComments.insert_many(data_to_post)

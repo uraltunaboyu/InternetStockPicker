@@ -36,27 +36,6 @@ router.get('/getData', (req, res) => {
     });
 });
 
-router.post('/putData', (req, res) => {
-    let data = new Data();
-
-    const { Symbol, CompanyName, Rank, RankChange } = req.body;
-
-    if (!Symbol || !CompanyName || !Rank || !RankChange) {
-        return res.json({
-            success: false,
-            error: req.body
-        });
-    }
-    data.Symbol = Symbol;
-    data.CompanyName = CompanyName;
-    data.Rank = Rank;
-    data.RankChange = RankChange;
-    data.save(err => {
-        if (err) return res.json({success: false, error: err});
-        return res.json({success: true});
-    })
-});
-
 app.use('/api', router);
 
 
