@@ -5,6 +5,7 @@ import TableDraft from "./TableDraft";
 import LineExample from './ChartsJSTest';
 import "bootswatch/dist/darkly/bootstrap.min.css";
 import { Container, Row } from 'react-bootstrap'
+import ReactTableTest from "./ReactTableTest";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class App extends React.Component {
             <LineExample />
           </Row>
           <Row id="table">
-            <TableDraft />
+            <ReactTableTest />
           </Row>
         </Container>
       </div>
