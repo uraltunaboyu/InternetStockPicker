@@ -24,11 +24,13 @@ function ReactTableTest() {
             },
             {
                 Header: 'Rank',
-                accessor: 'CurrentRank'
+                accessor: 'CurrentRank',
+                disableSortBy: true
             },
             {
                 Header: 'Change in Rank',
-                accessor: 'ChangeInRank'
+                accessor: 'ChangeInRank',
+                disableSortBy: true
             }
         ],
         []
