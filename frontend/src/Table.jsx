@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, usePagination } from 'react-table'
 import stockData from './companyMentioned.json'
-import { Table, Button, Form, Dropdown } from "react-bootstrap"
+import { Table, Button, Form, Container, Row, Col } from "react-bootstrap"
 
 
 function ReactTable() {
@@ -83,57 +83,60 @@ function ReactTable() {
           })}
         </tbody>
       </Table>
-      {/* 
-        Pagination can be built however you'd like. 
-        This is just a very basic UI implementation:
-      */}
-      <div className="pagination">
-        <Button variant="dark" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </Button>{' '}
-        <Button variant="dark" onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </Button>{' '}
-        <Button variant="dark" onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </Button>{' '}
-        <Button variant="dark" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </Button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Go to page:{' '}
-          <Form>
-            <Form.Group controlId="formPageNumber">
-            <Form.Control type="number" placeholder={pageIndex + 1}
+      <Container fluid>
+        <Row>
+          <div className="pagination">
+            <Col>
+            <Button variant="dark" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+              {'<<'}
+            </Button>{' '}
+            <Button variant="dark" onClick={() => previousPage()} disabled={!canPreviousPage}>
+              {'<'}
+            </Button>{' '}
+            <Button variant="dark" onClick={() => nextPage()} disabled={!canNextPage}>
+              {'>'}
+            </Button>{' '}
+            <Button variant="dark" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+              {'>>'}
+            </Button>{' '}
+            </Col>
+            <Col>
+            <div>
+              Page{' '}
+              <strong>
+                {pageIndex + 1} of {pageOptions.length}
+              </strong>{' '}
+              | Go to page:{' '}
+              <Form inline>
+                <Form.Group controlId="formPageNumber">
+                <Form.Control type="number" placeholder={pageIndex + 1} min="1"
+                  onChange={e => {
+                    let page = e.target.value ? Number(e.target.value) - 1 : 0
+                    gotoPage(page)
+                  }}
+                  style={{ width: '100px' }}
+                  />
+                </Form.Group>
+              </Form>
+            
+            <select class="custom-select"
+              value={pageSize}
               onChange={e => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                gotoPage(page)
+                setPageSize(Number(e.target.value))
               }}
               style={{ width: '100px' }}
-              />
-            </Form.Group>
-          </Form>
-        </span>{' '}
-              
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
+            >
+              {[10, 20, 30, 40, 50].map(pageSize => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+            </div>{' '}
+            </Col> 
+          </div>
+        </Row>
+      </Container>
     </>
   )
 }
