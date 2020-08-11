@@ -12,17 +12,18 @@ function ReactTable() {
 
   const columns = React.useMemo(
     () => [
+
       {
-        Header: 'Company Name',
-        accessor: 'Company Name', // accessor is the "key" in the data
+        Header: 'Rank',
+        accessor: 'CurrentRank',
       },
       {
         Header: 'Symbol',
         accessor: 'ACT Symbol',
       },
       {
-        Header: 'Rank',
-        accessor: 'CurrentRank',
+        Header: 'Company Name',
+        accessor: 'Company Name', // accessor is the "key" in the data
       },
       {
         Header: 'Change in Rank',
@@ -37,7 +38,7 @@ function ReactTable() {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page, 
+    page,
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -83,57 +84,58 @@ function ReactTable() {
           })}
         </tbody>
       </Table>
-      <Container fluid>
+      <Container>
         <Row>
           <div className="pagination">
-            <Col>
-            <Button variant="dark" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-              {'<<'}
-            </Button>{' '}
-            <Button variant="dark" onClick={() => previousPage()} disabled={!canPreviousPage}>
-              {'<'}
-            </Button>{' '}
-            <Button variant="dark" onClick={() => nextPage()} disabled={!canNextPage}>
-              {'>'}
-            </Button>{' '}
-            <Button variant="dark" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-              {'>>'}
-            </Button>{' '}
+            <Col md="auto">
+              <Button variant="dark" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                {'<<'}
+              </Button>{' '}
+              <Button variant="dark" onClick={() => previousPage()} disabled={!canPreviousPage}>
+                {'<'}
+              </Button>{' '}
+              <Button variant="dark" onClick={() => nextPage()} disabled={!canNextPage}>
+                {'>'}
+              </Button>{' '}
+              <Button variant="dark" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                {'>>'}
+              </Button>{' '}
             </Col>
-            <Col>
-            <div>
-              Page{' '}
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>{' '}
-              | Go to page:{' '}
+            <Col md="auto">
+              <div>
+                Page{' '}
+                <strong>
+                  {pageIndex + 1} of {pageOptions.length}
+                </strong>{' '}
+              | Go to page:
+              </div>
+            </Col>
+            <Col md="auto">
               <Form inline>
                 <Form.Group controlId="formPageNumber">
-                <Form.Control type="number" placeholder={pageIndex + 1} min="1"
-                  onChange={e => {
-                    let page = e.target.value ? Number(e.target.value) - 1 : 0
-                    gotoPage(page)
-                  }}
-                  style={{ width: '100px' }}
+                  <Form.Control type="number" placeholder={pageIndex + 1} min="1"
+                    onChange={e => {
+                      let page = e.target.value ? Number(e.target.value) - 1 : 0
+                      gotoPage(page)
+                    }}
+                    style={{ width: '100px' }}
                   />
                 </Form.Group>
+                <select class="custom-select" 
+                  value={pageSize}
+                  onChange={e => {
+                    setPageSize(Number(e.target.value))
+                  }}
+                  style={{ width: '100px' }}
+                >
+                  {[10, 20, 30, 40, 50].map(pageSize => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </select>
               </Form>
-            
-            <select class="custom-select"
-              value={pageSize}
-              onChange={e => {
-                setPageSize(Number(e.target.value))
-              }}
-              style={{ width: '100px' }}
-            >
-              {[10, 20, 30, 40, 50].map(pageSize => (
-                <option key={pageSize} value={pageSize}>
-                  Show {pageSize}
-                </option>
-              ))}
-            </select>
-            </div>{' '}
-            </Col> 
+            </Col>
           </div>
         </Row>
       </Container>
