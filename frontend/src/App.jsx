@@ -3,7 +3,7 @@ import Navbar from "./Navigation";
 import LineExample from './ChartsJSTest';
 import "bootswatch/dist/darkly/bootstrap.min.css";
 import { Container, Row } from 'react-bootstrap'
-import ReactTableTest from "./ReactTableTest";
+import ReactTable from "./Table";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class App extends React.Component {
             <LineExample />
           </Row>
           <Row id="table">
-            <ReactTableTest />
+            <ReactTable />
           </Row>
         </Container>
       </div>
