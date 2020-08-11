@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, usePagination } from 'react-table'
 import stockData from './companyMentioned.json'
-import { Table } from "react-bootstrap"
+import { Table, Button, Form, Dropdown } from "react-bootstrap"
 
 
 function ReactTable() {
@@ -88,18 +88,18 @@ function ReactTable() {
         This is just a very basic UI implementation:
       */}
       <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+        <Button variant="dark" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        </Button>{' '}
+        <Button variant="dark" onClick={() => previousPage()} disabled={!canPreviousPage}>
           {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        </Button>{' '}
+        <Button variant="dark" onClick={() => nextPage()} disabled={!canNextPage}>
           {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+        </Button>{' '}
+        <Button variant="dark" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
           {'>>'}
-        </button>{' '}
+        </Button>{' '}
         <span>
           Page{' '}
           <strong>
@@ -108,16 +108,19 @@ function ReactTable() {
         </span>
         <span>
           | Go to page:{' '}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              gotoPage(page)
-            }}
-            style={{ width: '100px' }}
-          />
+          <Form>
+            <Form.Group controlId="formPageNumber">
+            <Form.Control type="number" placeholder={pageIndex + 1}
+              onChange={e => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                gotoPage(page)
+              }}
+              style={{ width: '100px' }}
+              />
+            </Form.Group>
+          </Form>
         </span>{' '}
+              
         <select
           value={pageSize}
           onChange={e => {
