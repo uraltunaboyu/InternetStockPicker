@@ -72,6 +72,9 @@ if (not os.path.isfile(comments_file_name)):
     print('\n###    Comments downloaded successfully    ###\n')
 else:
     print(f"\n###    Comments file for {datestring} already exists, skipping download    ###\n")
+    with open(comments_file_name, "r", encoding="utf-8") as comments_file:
+        for line in comments_file:
+            massComments.append(line.strip())
 
 
 print('\n###    Updating mentions and ranks    ###\n')

@@ -3,7 +3,7 @@ import json
 from pymongo import MongoClient
 
 data_to_post = []
-date = datetime.datetime.now()
+date = datetime.datetime.today()
 
 try:
   companyMentioned = json.load(open(f"companyMentioned.json", "r"))
@@ -34,7 +34,7 @@ for company in companies:
   if company["ACT Symbol"] in top_50_company_tickers:
     company = get_company_from_top_50(company["ACT Symbol"])
     data_to_post.append({
-      "date": datetime.datetime.now(),
+      "date": date,
       "symbol": company["ACT Symbol"],
       "companyName": company["Company Name"],
       "rank": company["CurrentRank"],
@@ -48,7 +48,7 @@ for company in companies:
     })
   else :
     data_to_post.append({
-      "date": datetime.datetime.now(),
+      "date": date,
       "symbol": company["ACT Symbol"],
       "companyName": company["Company Name"],
       "rank": company["CurrentRank"],

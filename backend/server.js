@@ -36,6 +36,19 @@ router.get('/getData', (req, res) => {
     });
 });
 
+router.post('/getDataInRange', (req, res) => {
+    const { firstDate, lastDate } = req.body;
+
+    if (!firstDate || !lastDate) {
+        return res.json({
+            success: false,
+            error: "No dates set"
+        })
+    }
+
+    return Data.find({date: {$gte: new Date(firstDate), $lte: new Date(lastDate)}}).sort({date: 1}).exec();
+})
+
 app.use('/api', router);
 
 
