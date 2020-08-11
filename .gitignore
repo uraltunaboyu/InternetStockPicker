@@ -27,3 +27,4 @@ yarn-error.log*
 data/URS
 data/env
 data/praw.ini
+data/comments_*

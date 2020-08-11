@@ -53,10 +53,6 @@ export default function Navigation(props) {
           <Nav.Link href="#detan">Detailed Analysis</Nav.Link>
           <Nav.Link href="#footer">About us</Nav.Link>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search $Ticker</Button>
-        </Form>
       </Navbar.Collapse>
     </Navbar>
   );

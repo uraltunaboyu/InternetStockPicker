@@ -9,6 +9,7 @@ const fs = require('fs');
 const logger = require('morgan');
 const Data = require('./data');
 const cors = require('cors');
+const { json } = require('body-parser');
 require('dotenv').config();
 
 
@@ -35,6 +36,24 @@ router.get('/getData', (req, res) => {
         return res.json({ success: true, data: data})
     });
 });
+
+router.post('/getData', (req, res) => {
+    const { firstDate, lastDate, names } = req.body;
+
+    if(!firstDate || !lastDate || !names) {
+        return res.json({
+            success: false,
+            error: "Invalid values provided",
+            body: req.body
+        })
+    }
+
+    let query = Data.find({date: {$gte: new Date(firstDate), $lte: new Date(lastDate)}, symbol: {$in: names}}).sort({date: 1})
+    query.exec((err, companies) => {
+        if (err) return res.json({success:false, error: err});
+        return res.json({success:true, result:companies})
+    })
+})
 
 app.use('/api', router);
 
