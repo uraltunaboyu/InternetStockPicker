@@ -2,9 +2,86 @@ import React from "react";
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, usePagination } from 'react-table'
 import stockData from './companyMentioned.json'
 import { Table, Button, Form, Container, Row, Col } from "react-bootstrap"
+import matchSorter from 'match-sorter'
+
+
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) {
+  const count = preGlobalFilteredRows.length
+  const [value, setValue] = React.useState(globalFilter)
+  const onChange = useAsyncDebounce(value => {
+    setGlobalFilter(value || undefined)
+  }, 200)
+
+  return (
+    <div>
+      Search:{' '}
+      <input class="form-control mr-sm-2" 
+        value={value || ""}
+        onChange={e => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        placeholder={`Rank, Symbol or Name`}
+        style={{
+          fontSize: '1.1rem',
+          border: '0',
+        }}
+      />
+    </div>
+  )
+}
+
+
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}) {
+  const count = preFilteredRows.length
+
+  return (
+    <input
+      value={filterValue || ''}
+      onChange={e => {
+        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search Rank, Symbol, or Name`}
+    />
+  )
+}
+
+function fuzzyTextFilterFn(rows, id, filterValue) {
+  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
+}
 
 
 function ReactTable() {
+
+  const filterTypes = React.useMemo(
+    () => ({
+      fuzzyText: fuzzyTextFilterFn,
+      text: (rows, id, filterValue) => {
+        return rows.filter(row => {
+          const rowValue = row.values[id]
+          return rowValue !== undefined
+            ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+            : true
+        })
+      },
+    }),
+    []
+  )
+
+  const defaultColumn = React.useMemo(
+    () => ({
+      Filter: DefaultColumnFilter,
+    }),
+    []
+  )
 
   const data = React.useMemo(
     () => stockData
@@ -47,13 +124,22 @@ function ReactTable() {
     nextPage,
     previousPage,
     setPageSize,
+    rows,
+    state,
+    visibleColumns,
+    preGlobalFilteredRows,
+    setGlobalFilter,
     state: { pageIndex, pageSize },
   } = useTable(
     {
       columns,
       data,
+      defaultColumn, // Be sure to pass the defaultColumn option
+      filterTypes,
       initialState: { pageIndex: 0 },
     },
+    useFilters, // useFilters!
+    useGlobalFilter, // useGlobalFilter!
     usePagination
   )
 
@@ -63,10 +149,24 @@ function ReactTable() {
     <>
       <Table striped {...getTableProps()}>
         <thead>
+        <tr>
+            <th
+              style={{
+                textAlign: 'left',
+              }}
+            >
+              <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              />
+            </th>
+          </tr>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th {...column.getHeaderProps()}>{column.render('Header')}
+                </th>
               ))}
             </tr>
           ))}
@@ -121,7 +221,7 @@ function ReactTable() {
                     style={{ width: '100px' }}
                   />
                 </Form.Group>
-                <select class="custom-select" 
+                <select class="custom-select"
                   value={pageSize}
                   onChange={e => {
                     setPageSize(Number(e.target.value))
