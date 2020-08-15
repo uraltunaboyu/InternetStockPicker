@@ -148,7 +148,7 @@ function ReactTable() {
   return (
     <>
       <Table striped {...getTableProps()}>
-        <thead>
+        <thead >
         <tr>
             <th
               style={{
@@ -163,7 +163,7 @@ function ReactTable() {
             </th>
           </tr>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr style={{textAlign: 'center'}}  {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 <th {...column.getHeaderProps()}>{column.render('Header')}
                 </th>
@@ -175,7 +175,7 @@ function ReactTable() {
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr style={{width: '20px', textAlign: 'center'}}  {...row.getRowProps()}>
                 {row.cells.map(cell => {
                   return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 })}
