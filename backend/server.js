@@ -2,12 +2,12 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const fs = require('fs');
 const logger = require('morgan');
-const Data = require('./data');
 const cors = require('cors');
 const { json } = require('body-parser');
 require('dotenv').config();
@@ -17,7 +17,7 @@ app.use(cors());
 const router = express.Router();
 
 const dbRoute = process.env.MONGO_URI;
-mongoose.connect(dbRoute, {useNewUrlParser: true});
+mongoose.connect(dbRoute, {useNewUrlParser: true}).catch(err => console.log(err));
 
 
 let db = mongoose.connection;
@@ -25,33 +25,51 @@ let db = mongoose.connection;
 db.once('open', () => console.log('Database connection successful.'));
 db.once('error', console.error.bind(console, 'MongoDB connection error.'));
 
+let dataSchema = mongoose.model('parsedComments', new Schema(
+    {
+      date: {
+        type: Date,
+        index: true
+      },
+      symbol: String,
+      companyName: String,
+      rank: Number,
+      rankChange: Number,
+      stockData: {
+        stockOpen: Number,
+        stockClose: Number,
+        stockChangePercent: String,
+        stockChangeDollar: String
+      }
+    }
+  ));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
 router.get('/getData', (req, res) => {
-    Data.find((err, data) => {
+    dataSchema.find((err, comps) => {
         if (err) return res.json({success: false, error: err});
-        return res.json({ success: true, data: data})
+        return res.json({ success: true, data: comps})
     });
 });
 
 router.post('/getData', (req, res) => {
     const { firstDate, lastDate, names } = req.body;
 
-    if(!firstDate || !lastDate || !names) {
-        return res.json({
-            success: false,
-            error: "Invalid values provided",
-            body: req.body
-        })
-    }
+    // if(!firstDate || !lastDate || !names) {
+    //     return res.json({
+    //         success: false,
+    //         error: "Invalid values provided",
+    //         body: req.body
+    //     })
+    // }
 
-    let query = Data.find({date: {$gte: new Date(firstDate), $lte: new Date(lastDate)}, symbol: {$in: names}}).sort({date: 1})
+    let query = dataSchema.find({"symbol": "AMD"}).sort({date: 1})
     query.exec((err, companies) => {
         if (err) return res.json({success:false, error: err});
-        return res.json({success:true, result:companies});
+        return res.json({success:true, result:companies, names: names});
     })
 })
 

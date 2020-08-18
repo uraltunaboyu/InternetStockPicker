@@ -26,9 +26,9 @@ def get_company_from_top_50(symbol):
     if company["ACT Symbol"] == symbol:
       return company
 
-client = MongoClient("mongodb+srv://admin:vLrRHmq2DuDd4rhY@cluster0.uhppr.mongodb.net/parsedComments?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://admin:vLrRHmq2DuDd4rhY@cluster0.uhppr.mongodb.net/parsedcomments?retryWrites=true&w=majority")
 db = client.internetstockpicks
-parsedComments = db.parsedComments
+parsedComments = db.parsedcomments
 
 for company in companies:
   if company["ACT Symbol"] in top_50_company_tickers:
