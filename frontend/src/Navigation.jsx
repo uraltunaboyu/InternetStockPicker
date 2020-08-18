@@ -46,9 +46,9 @@ export default function Navigation(props) {
               </NavDropdown.Item>
             </NavDropdown>
           </NavDropdown>
-          <Nav.Link href="#home">Table</Nav.Link>
-          <Nav.Link href="#detan">Detailed Analysis</Nav.Link>
-          <Nav.Link href="#footer">About us</Nav.Link>
+          <Nav.Link href="#graph">Graph</Nav.Link>
+          <Nav.Link href="#table">Table</Nav.Link>
+          <Nav.Link href="#about-us">About us</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
