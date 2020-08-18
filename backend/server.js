@@ -51,7 +51,7 @@ router.post('/getData', (req, res) => {
     let query = Data.find({date: {$gte: new Date(firstDate), $lte: new Date(lastDate)}, symbol: {$in: names}}).sort({date: 1})
     query.exec((err, companies) => {
         if (err) return res.json({success:false, error: err});
-        return res.json({success:true, result:companies})
+        return res.json({success:true, result:companies});
     })
 })
 

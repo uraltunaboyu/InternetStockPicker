@@ -225,9 +225,7 @@ function ReactTable() {
                   value={pageSize}
                   onChange={e => {
                     setPageSize(Number(e.target.value))
-                  }}
-                  style={{ width: '100px' }}
-                >
+                  }}>
                   {[10, 20, 30, 40, 50].map(pageSize => (
                     <option key={pageSize} value={pageSize}>
                       Show {pageSize}

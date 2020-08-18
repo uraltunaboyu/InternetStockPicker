@@ -20,3 +20,9 @@ footer {
 #graph {
     padding-bottom: 75px;
 }
+
+#table-size-select {
+    position: absolute;
+    right: 0px;
+    width: 125px;
+}
