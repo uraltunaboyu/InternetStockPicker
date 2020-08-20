@@ -7,18 +7,27 @@ class Graph extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {axes : [{primary: true, type:'time', position:'bottom'},
-                          {type: 'linear', id:'Ranking', min:0, position:'left'}]};
+    this.state = {names: ["AMD", "MSFT", "TSLA", "AAPL", "AMZN", "NVDA", "TD", "LOW", "RK", "GOLD"],
+                  axes : [{primary: true, type:'time', position:'bottom'},
+                          {type: 'linear', id:'Ranking', min:0, position:'left'}],
+                  graphData: []};
   }
 
   componentDidMount() {
     axios.post('http://localhost:9000/api/getData', {
-      names: ["AMD", "MSFT"]
+      names: this.state.names
     })
     .then(response => {
       console.log(response);
-      this.setState({
-        data: response.result
+      let names = this.state.names;
+      let result = response.data.return;
+      this.setState(state => {
+        names.map(symbol => {
+          graphData: state.graphData.push({
+            label: symbol,
+            data: result[result.indexOf(symbol)]
+          })
+        })
       })
     }).catch(err => {
       console.log(err)
@@ -27,7 +36,7 @@ class Graph extends React.Component {
 
   render() {
     return(
-      <Chart data={this.state.data} axes={this.state.axes} tooltip/>
+      <Chart data={this.state.graphData} axes={this.state.axes} tooltip/>
     )
   }
 }

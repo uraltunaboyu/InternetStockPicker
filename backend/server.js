@@ -66,10 +66,19 @@ router.post('/getData', (req, res) => {
     //     })
     // }
 
-    let query = dataSchema.find({"symbol": "AMD"}).sort({date: 1})
+    let query = dataSchema.find({symbol: {$in: names}}).sort({symbol: 1, date: 1})
     query.exec((err, companies) => {
         if (err) return res.json({success:false, error: err});
-        return res.json({success:true, result:companies, names: names});
+        let companyNames = [];
+        let result = [,];
+        companies.map(company => {
+            if (!companyNames.includes(company.symbol)) {
+                companyNames.push(company.symbol);
+                result[companyNames.indexOf(company.symbol)] = [];
+            }
+            result[companyNames.indexOf(company.symbol)].push(company.rank);
+        });
+        return res.json({success:true, return: result, returnKey: companyNames});
     })
 })
 
