@@ -1,44 +1,64 @@
 import React from 'react';
 import { Chart } from 'react-charts'
-import dummy from './dummy.js'
 import axios from 'axios'
 
-class Graph extends React.Component {
+export default function Graph(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {names: ["AMD", "MSFT", "TSLA", "AAPL", "AMZN", "NVDA", "TD", "LOW", "RK", "GOLD"],
-                  axes : [{primary: true, type:'time', position:'bottom'},
-                          {type: 'linear', id:'Ranking', min:0, position:'left'}],
-                  graphData: []};
-  }
+  let namesToGet = ["AMD", "MSFT", "TSLA", "AAPL", "AMZN", "NVDA", "TD", "LOW", "GOLD"];
+  const axes = React.useMemo(
+    () => [{primary: true, type:'linear', position:'bottom'},
+    {type: 'linear', position:'left'}], []
+  ); 
+  let graphData = [];
 
-  componentDidMount() {
-    axios.post('http://localhost:9000/api/getData', {
-      names: this.state.names
-    })
-    .then(response => {
-      console.log(response);
-      let names = this.state.names;
-      let result = response.data.return;
-      this.setState(state => {
-        names.map(symbol => {
-          graphData: state.graphData.push({
-            label: symbol,
-            data: result[result.indexOf(symbol)]
+  let backupData = [
+    {
+      label: 'Series 1',
+      data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
+    },
+    {
+      label: 'Series 2',
+      data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
+    }
+  ]
+
+  axios.post('http://localhost:9000/api/getData', {
+    names: namesToGet
+  })
+  .then(response => {
+    let result = response.data.return;
+    let resultKey = response.data.returnKey;
+    namesToGet.map(symbol => {
+      if (resultKey.indexOf(symbol) > -1) {
+        let i = 0;
+        graphData.push({
+          label: symbol,
+          data: result[resultKey.indexOf(symbol)].map(value => {
+            let indexedArrayResult = [i, value];
+            i++;
+            return indexedArrayResult;
           })
         })
-      })
-    }).catch(err => {
-      console.log(err)
+      }
+      return symbol;
     })
-  }
+  }).catch(err => {
+    console.error(err)
+  })
 
-  render() {
+  const data = React.useMemo(
+    () => graphData,
+    [graphData]
+  )
+
+  console.log(data);
+
     return(
-      <Chart data={this.state.graphData} axes={this.state.axes} tooltip/>
+      <div style = {{
+        height: '600px',
+        width: '800px'
+      }}>
+        <Chart data={data} axes={axes} tooltip/>
+      </div>
     )
-  }
 }
-
-export default Graph;

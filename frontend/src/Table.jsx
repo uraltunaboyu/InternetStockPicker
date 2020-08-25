@@ -19,7 +19,7 @@ function GlobalFilter({
   return (
     <div>
       Search:{' '}
-      <input class="form-control mr-sm-2" 
+      <input className="form-control mr-sm-2" 
         value={value || ""}
         onChange={e => {
           setValue(e.target.value);
@@ -221,7 +221,7 @@ function ReactTable() {
                     style={{ width: '100px' }}
                   />
                 </Form.Group>
-                <select class="custom-select"
+                <select className="custom-select"
                   value={pageSize}
                   onChange={e => {
                     setPageSize(Number(e.target.value))
