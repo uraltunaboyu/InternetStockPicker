@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navigation";
 import Graph from './ChartsJSTest';
+import GraphTest from './GraphTest';
 import "bootswatch/dist/darkly/bootstrap.min.css";
 import { Container, Row } from 'react-bootstrap'
 import ReactTable from "./Table";
@@ -16,9 +17,6 @@ class App extends React.Component {
       <div className="App">
         <Navbar />
         <Container>
-          <Row id="graph">
-            <Graph />
-          </Row>
           <Row id="table">
             <ReactTable />
           </Row>
